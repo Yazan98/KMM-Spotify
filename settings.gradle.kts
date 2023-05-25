@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Radio"
 include(":androidApp")
 include(":shared")
+include(":sopify")
