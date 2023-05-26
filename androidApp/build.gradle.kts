@@ -88,8 +88,8 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":sopify"))
-//    implementation(project(":androidFeatures:auth"))
-//    implementation(project(":androidFeatures:core"))
+    implementation(project(":androidFeatures:auth"))
+    implementation(project(":androidFeatures:core"))
 //    implementation(project(":androidFeatures:home"))
     implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
     constraints {

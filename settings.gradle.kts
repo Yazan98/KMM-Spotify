@@ -17,3 +17,5 @@ rootProject.name = "Radio"
 include(":androidApp")
 include(":shared")
 include(":sopify")
+include(":androidFeatures:core")
+include(":androidFeatures:auth")

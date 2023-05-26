@@ -10,6 +10,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/androidApp" />
+            <option value="$PROJECT_DIR$/androidFeatures" />
+            <option value="$PROJECT_DIR$/androidFeatures/auth" />
+            <option value="$PROJECT_DIR$/androidFeatures/core" />
             <option value="$PROJECT_DIR$/shared" />
             <option value="$PROJECT_DIR$/sopify" />
           </set>

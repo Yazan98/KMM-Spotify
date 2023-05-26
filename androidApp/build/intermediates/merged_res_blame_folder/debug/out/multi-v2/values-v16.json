@@ -1,8 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-40:/values-v16/values-v16.xml",
+            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-v16/values-v16.xml",
             "map": [
+                {
+                    "source": "/Users/yazantarifi/.gradle/caches/transforms-3/cf16f5dc40861ce8407f3d211a079e46/transformed/appcompat-1.5.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                },
                 {
                     "source": "/Users/yazantarifi/.gradle/caches/transforms-3/d086ca8c33f594178ecc43e87dd7e653/transformed/core-1.9.0/res/values-v16/values-v16.xml",
                     "from": {

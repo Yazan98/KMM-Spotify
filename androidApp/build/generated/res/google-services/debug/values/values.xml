@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">976051237991</string>
+    <string name="google_api_key" translatable="false">AIzaSyCeZC8z-EiHBMWcPgjpujcZJ4D6G9OAZM0</string>
+    <string name="google_app_id" translatable="false">1:976051237991:android:2d6e656f36a118d32550c2</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCeZC8z-EiHBMWcPgjpujcZJ4D6G9OAZM0</string>
+    <string name="google_storage_bucket" translatable="false">radio-app-e0e5b.appspot.com</string>
+    <string name="project_id" translatable="false">radio-app-e0e5b</string>
+</resources>

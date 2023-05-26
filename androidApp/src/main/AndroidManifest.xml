@@ -11,21 +11,30 @@
     <application
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.App"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
+        android:name=".RadioApplication"
+        android:label="@string/app_name"
         android:usesCleartextTraffic="true"
         tools:targetApi="32"
         android:appCategory="social"
         android:allowAudioPlaybackCapture="false"
         android:allowClearUserData="true">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".RadioIntroScreen"
+            android:theme="@style/Theme.MainScreen"
+            android:screenOrientation="fullSensor"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".auth.RadioAuthScreen"
+            android:screenOrientation="fullSensor" />
+
     </application>
 </manifest> 
