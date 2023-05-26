@@ -12,10 +12,12 @@ import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen_MembersInjector;
 import com.yazantarifi.radio.android.home.HomeModule;
+import com.yazantarifi.radio.android.home.HomeModule_GetGetFeedUseCaseFactory;
 import com.yazantarifi.radio.android.home.RadioHomeScreen;
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel;
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.yazantarifi.radio.useCases.GetAccessTokenUseCase;
+import com.yazantarifi.radio.useCases.GetFeedUseCase;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
 import dagger.hilt.android.flags.HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule;
@@ -34,6 +36,7 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideCont
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
 import dagger.internal.Preconditions;
+import io.ktor.client.HttpClient;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -476,7 +479,7 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.yazantarifi.radio.android.home.viewModels.HomeViewModel 
-          return (T) new HomeViewModel();
+          return (T) new HomeViewModel(singletonCImpl.getGetFeedUseCaseProvider.get(), singletonCImpl.getStorageProviderImplementationInstanceProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -561,6 +564,10 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
     private Provider<GetAccessTokenUseCase> getGetAccessTokenUseCaseProvider;
 
+    private Provider<HttpClient> getHttpClientProvider;
+
+    private Provider<GetFeedUseCase> getGetFeedUseCaseProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -571,6 +578,8 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
     private void initialize(final ApplicationContextModule applicationContextModuleParam) {
       this.getStorageProviderImplementationInstanceProvider = DoubleCheck.provider(new SwitchingProvider<SopifyStorageProvider>(singletonCImpl, 0));
       this.getGetAccessTokenUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<GetAccessTokenUseCase>(singletonCImpl, 1));
+      this.getHttpClientProvider = DoubleCheck.provider(new SwitchingProvider<HttpClient>(singletonCImpl, 3));
+      this.getGetFeedUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<GetFeedUseCase>(singletonCImpl, 2));
     }
 
     @Override
@@ -611,6 +620,12 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
           case 1: // com.yazantarifi.radio.useCases.GetAccessTokenUseCase 
           return (T) ApplicationModule_GetGetAccessTokenUseCaseFactory.getGetAccessTokenUseCase();
+
+          case 2: // com.yazantarifi.radio.useCases.GetFeedUseCase 
+          return (T) HomeModule_GetGetFeedUseCaseFactory.getGetFeedUseCase(singletonCImpl.getHttpClientProvider.get());
+
+          case 3: // io.ktor.client.HttpClient 
+          return (T) ApplicationModule_GetHttpClientFactory.getHttpClient();
 
           default: throw new AssertionError(id);
         }

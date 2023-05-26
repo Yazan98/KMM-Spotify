@@ -1,6 +1,7 @@
 package com.yazantarifi.radio.android
 
 import android.content.Context
+import com.yazantarifi.kmm.sopy.base.api.HttpBaseClient
 import com.yazantarifi.kmm.sopy.base.context.SopifyContext
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageKeyValue
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider
@@ -11,6 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
 import javax.inject.Singleton
 
 @Module
@@ -27,6 +29,12 @@ object ApplicationModule {
     @Singleton
     fun getGetAccessTokenUseCase(): GetAccessTokenUseCase {
         return GetAccessTokenUseCase(RadioApplicationProps.getHttpClientInstance())
+    }
+
+    @Provides
+    @Singleton
+    fun getHttpClient(): HttpClient {
+        return RadioApplicationProps.getHttpClientInstance() ?: HttpBaseClient().httpClient
     }
 
 }

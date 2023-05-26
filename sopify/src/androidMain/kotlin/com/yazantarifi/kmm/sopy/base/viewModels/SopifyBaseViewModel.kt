@@ -25,7 +25,7 @@ actual abstract class SopifyBaseViewModel<Action, StateType>: ViewModel() {
     actual abstract fun initViewModelState()
     actual abstract fun getInitialState(): SopifyState
     actual abstract suspend fun onNewActionTriggered(action: Action)
-    actual fun getSupportedUseCases(): ArrayList<SopifyUseCaseType> {
+    actual open fun getSupportedUseCases(): ArrayList<SopifyUseCaseType> {
         return arrayListOf()
     }
 
