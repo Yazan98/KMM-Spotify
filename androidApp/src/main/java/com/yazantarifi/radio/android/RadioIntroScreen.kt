@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider
 import com.yazantarifi.radio.android.auth.RadioAuthScreen
 import com.yazantarifi.radio.android.core.screens.SopifyScreen
+import com.yazantarifi.radio.android.home.RadioHomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,9 +21,7 @@ class RadioIntroScreen : SopifyScreen() {
     override fun onScreenStarted(savedInstanceState: Bundle?) {
         super.onScreenStarted(savedInstanceState)
         when (storage.isUserLoggedIn()) {
-            true -> {
-//                HomeScreen.startScreen(this)
-            }
+            true ->  RadioHomeScreen.startScreen(this)
             false -> RadioAuthScreen.startScreen(this)
         }
     }

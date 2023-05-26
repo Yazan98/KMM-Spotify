@@ -90,7 +90,7 @@ dependencies {
     implementation(project(":sopify"))
     implementation(project(":androidFeatures:auth"))
     implementation(project(":androidFeatures:core"))
-//    implementation(project(":androidFeatures:home"))
+    implementation(project(":androidFeatures:home"))
     implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {

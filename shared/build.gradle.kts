@@ -2,6 +2,8 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("kotlinx-serialization")
+    id("io.realm.kotlin")
 }
 
 kotlin {

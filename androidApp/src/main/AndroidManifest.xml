@@ -36,5 +36,8 @@
         <activity android:name=".auth.RadioAuthScreen"
             android:screenOrientation="fullSensor" />
 
+        <activity android:name=".home.RadioHomeScreen"
+            android:screenOrientation="fullSensor"/>
+
     </application>
 </manifest> 

@@ -56,6 +56,7 @@ actual class HttpBaseClient {
             }
 
             handleResponseExceptionWithRequest { cause: Throwable, request: HttpRequest ->
+                println("UIUI :: Exception : ${cause.message}")
                 when (cause) {
                     is ResponseException -> {
                         throw cause

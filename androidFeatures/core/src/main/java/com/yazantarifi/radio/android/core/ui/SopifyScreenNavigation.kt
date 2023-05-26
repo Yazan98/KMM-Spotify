@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.ComponentName
 
 enum class SopifyScreenNavigation constructor(private val screenPath: String) {
-    HOME_SCREEN("com.yazantarifi.kmm.home.HomeScreen");
+    HOME_SCREEN("com.yazantarifi.radio.android.home.RadioHomeScreen");
 
     companion object {
 

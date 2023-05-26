@@ -3,6 +3,7 @@ package com.yazantarifi.kmm.sopy.api
 import io.ktor.client.HttpClient
 import io.ktor.client.statement.HttpResponseContainer
 import io.ktor.client.statement.HttpResponsePipeline
+import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
 import io.ktor.serialization.suitableCharset
 import io.ktor.util.reflect.TypeInfo
@@ -50,6 +51,10 @@ abstract class SopifyRequestManager {
         val typeProjection = kotlinType?.arguments?.get(0)
         val kType = typeProjection!!.type!!
         return TypeInfo(kType.classifier as KClass<*>, kType.platformType)
+    }
+
+    protected fun isSuccessResponse(responseCode: HttpStatusCode): Boolean {
+        return responseCode == HttpStatusCode.Accepted || responseCode == HttpStatusCode.OK || responseCode == HttpStatusCode.Created
     }
 
     private fun getSerializable(): KotlinxSerializationConverter {

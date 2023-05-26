@@ -3,7 +3,8 @@ package com.yazantarifi.radio.api
 class RedditAuthManager {
 
     companion object {
-        const val CLIENT_ID = "C3gcpHNRHwVO5JDe8W-wxg"
+        const val CLIENT_ID = "4hZ_IP2WqOXhatcxuw8vow"
+        const val CLIENT_SECRETE = "TbO_mLm13pDDMOK9ztyryPVOo0-JlA"
     }
 
     fun getAuthLoginUrl(): String {
