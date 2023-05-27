@@ -42,13 +42,35 @@ data class RedditFeedPost(
     @SerialName("pwls") val pwls: Int? = 0,
     @SerialName("thumbnail_height") val imageHeight: Int? = 0,
     @SerialName("thumbnail_width") val imageWidth: Int? = 0,
-    @SerialName("all_awardings") val awardings: List<RedditPostAwardings>? = null
+    @SerialName("all_awardings") val awardings: List<RedditPostAwardings>? = null,
+    @SerialName("preview") val preview: RedditPostPreviewMedia? = null
 )
+
+@Serializable
+data class RedditPostPreviewMedia(
+    @SerialName("images") val images: List<RedditPostImage>? = null
+)
+
+@Serializable
+data class RedditPostImage(
+    @SerialName("source") val source: RedditPostImageSource? = null
+)
+
+@Serializable
+data class RedditPostImageSource(
+    @SerialName("url") val url: String? = "",
+    @SerialName("width") val width: Int? = 0,
+    @SerialName("height") val height: Int? = 0,
+) {
+    fun getImageUrl(): String {
+        return url?.replace("amp;", "") ?: ""
+    }
+}
 
 @Serializable
 data class RedditPostAwardings(
     @SerialName("is_video") val isVideo: Boolean? = false,
-    @SerialName("url") val url: String? = "",
+    @SerialName("icon_url") val url: String? = "",
     @SerialName("author") val author: String? = "",
     @SerialName("id") val id: String? = "",
     @SerialName("created_utc") val createdSort: Double? = 0.0,

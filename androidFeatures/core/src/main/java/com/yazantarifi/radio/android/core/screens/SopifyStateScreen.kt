@@ -140,6 +140,16 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
 
     }
 
+    companion object {
+        @Composable
+        fun getGreyColor(): Color {
+            return when (isSystemInDarkTheme()) {
+                true -> Color(0xFF000000)
+                false -> Color(0xFFC5C4C4)
+            }
+        }
+    }
+
     @Composable
     abstract fun onScreenContent(savedInstanceState: Bundle?): ViewModel
 

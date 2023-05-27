@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.composables.RadioApplicationLoadingComposable
+import com.yazantarifi.radio.android.core.composables.screens.PostListingComposable
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
 
@@ -28,11 +29,7 @@ fun FeedComposable(viewModel: HomeViewModel) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(viewModel.feedContentListener.value) { item ->
                 item?.let {
-                    Column(modifier = Modifier.padding(5.dp)) {
-                        Text(text = it.name ?: "")
-                        Text(text = it.title ?: "")
-                        Divider()
-                    }
+                    PostListingComposable(item)
                 }
             }
         }
