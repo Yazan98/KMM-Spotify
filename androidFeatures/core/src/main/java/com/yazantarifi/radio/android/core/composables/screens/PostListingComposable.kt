@@ -32,7 +32,6 @@ fun PostListingComposable(post: RedditFeedPost) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
         ) {
-            Spacer(modifier = Modifier.width(5.dp))
             ColoredText(message = post.authorFullName ?: "")
             Spacer(modifier = Modifier.width(5.dp))
             ColoredText(message = " ${RadioApplicationMessages.getMessage("in")} ")

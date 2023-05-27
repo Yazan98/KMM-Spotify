@@ -9,4 +9,5 @@ object RedditApiInfo {
 enum class ApiUrls constructor(val requestUrl: String) {
     ACCESS_TOKEN(RedditApiInfo.API_BASE_URL + "access_token"),
     FEED("https://oauth.reddit.com/best"),
+    DISCOVER("https://oauth.reddit.com/"),
 }

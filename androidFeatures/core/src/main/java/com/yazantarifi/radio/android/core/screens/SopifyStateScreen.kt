@@ -148,6 +148,11 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
                 false -> Color(0xFFC5C4C4)
             }
         }
+
+        @Composable
+        fun getPrimaryColor(): Color {
+            return Color(0xFF36FFBF)
+        }
     }
 
     @Composable

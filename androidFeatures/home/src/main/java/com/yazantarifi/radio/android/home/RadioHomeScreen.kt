@@ -20,6 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -34,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
 
+    private var navController: NavHostController? = null
     companion object {
         fun startScreen(context: ComponentActivity) {
             context.startActivity(Intent(context, RadioHomeScreen::class.java))
@@ -43,10 +46,10 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
 
     @Composable
     override fun onScreenContent(savedInstanceState: Bundle?): HomeViewModel {
-        val navController = rememberNavController()
+        navController = rememberNavController()
         val viewModel: HomeViewModel = hiltViewModel()
         NavHost(
-            navController = navController,
+            navController = navController!!,
             startDestination = "home",
             modifier = Modifier.background(getBackgroundColor())
         ) {
@@ -60,7 +63,6 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
     @Composable
     override fun SopifyBottomBarComposable() {
         var selectedItem by remember { mutableStateOf(0) }
-        val navController = rememberNavController()
         NavigationBar(containerColor = getSeconderyCardsColor()) {
             arrayListOf(0, 1, 2)
                 .forEachIndexed { index, item ->
@@ -76,11 +78,11 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
                         },
                         label = {
                             if (index == 0) {
-                                Text(text = "home")
+                                Text(text = "Home")
                             } else if (index == 1) {
-                                Text(text = "discover")
+                                Text(text = "Discover")
                             } else {
-                                Text(text = "account")
+                                Text(text = "Account")
                             }
                         },
                         selected = selectedItem == index,
@@ -88,11 +90,11 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
                             if (selectedItem != index) {
                                 selectedItem = index
                                 if (selectedItem == 0) {
-                                    navController.navigate("home")
+                                    navController?.navigate("home")
                                 } else if (selectedItem == 1) {
-                                    navController.navigate("discover")
+                                    navController?.navigate("discover")
                                 } else {
-                                    navController.navigate("account")
+                                    navController?.navigate("account")
                                 }
                             }
                         }

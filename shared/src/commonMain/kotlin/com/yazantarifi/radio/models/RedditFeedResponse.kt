@@ -40,10 +40,25 @@ data class RedditFeedPost(
     @SerialName("author_premium") val isPremium: Boolean? = false,
     @SerialName("over_18") val isOver18: Boolean? = false,
     @SerialName("pwls") val pwls: Int? = 0,
+    @SerialName("num_comments") val comments: Int? = 0,
     @SerialName("thumbnail_height") val imageHeight: Int? = 0,
     @SerialName("thumbnail_width") val imageWidth: Int? = 0,
     @SerialName("all_awardings") val awardings: List<RedditPostAwardings>? = null,
-    @SerialName("preview") val preview: RedditPostPreviewMedia? = null
+    @SerialName("preview") val preview: RedditPostPreviewMedia? = null,
+    @SerialName("media") val media: RedditPostVideoContainer? = null,
+    @SerialName("secure_media") val securedMedia: RedditPostVideoContainer? = null
+)
+
+@Serializable
+data class RedditPostVideoContainer(
+    @SerialName("reddit_video") val videoContent: RedditPostVideoContent? = null
+)
+
+@Serializable
+data class RedditPostVideoContent(
+    @SerialName("bitrate_kbps") val bitrate: Long? = 0L,
+    @SerialName("fallback_url") val url: String? = "",
+    @SerialName("duration") val duration: Long? = 0L
 )
 
 @Serializable
