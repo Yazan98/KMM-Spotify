@@ -33,7 +33,7 @@ fun PostListingComposable(post: RedditFeedPost) {
             horizontalArrangement = Arrangement.Start,
         ) {
             Spacer(modifier = Modifier.width(5.dp))
-            ColoredText(message = post.name ?: "")
+            ColoredText(message = post.authorFullName ?: "")
             Spacer(modifier = Modifier.width(5.dp))
             ColoredText(message = " ${RadioApplicationMessages.getMessage("in")} ")
             Spacer(modifier = Modifier.width(5.dp))
@@ -60,8 +60,8 @@ fun PostListingComposable(post: RedditFeedPost) {
         Spacer(modifier = Modifier.height(15.dp))
         post.preview?.images?.get(0)?.source?.let {
             var height = (it.height ?: 0)
-            if (height > 500) {
-                height = 500
+            if (height > 650) {
+                height = 650
             }
 
             AsyncImage(

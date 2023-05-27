@@ -25,7 +25,7 @@ data class RedditFeedPostPayload(
 data class RedditFeedPost(
     @SerialName("subreddit") val subReddit: String? = "",
     @SerialName("selftext") val selftext: String? = "",
-    @SerialName("author_fullname") val authorFullName: String? = "",
+    @SerialName("author") val authorFullName: String? = "",
     @SerialName("link_flair_text") val linkText: String? = "",
     @SerialName("name") val name: String? = "",
     @SerialName("post_hint") val postType: String? = "",

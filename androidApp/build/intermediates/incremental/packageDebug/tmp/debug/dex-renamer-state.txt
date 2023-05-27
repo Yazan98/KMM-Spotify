@@ -1,4 +1,4 @@
-#Sat May 27 11:40:47 EET 2023
+#Sat May 27 11:48:37 EET 2023
 base.0=/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/dex/debug/mergeLibDexDebug/1/classes.dex
 base.10=/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/dex/debug/mergeLibDexDebug/7/classes.dex
