@@ -80,6 +80,6 @@ android {
     namespace = "com.yazantarifi.kmm.sopy"
     compileSdk = 33
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
     }
 }

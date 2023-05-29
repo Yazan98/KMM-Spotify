@@ -1,6 +1,7 @@
 package com.yazantarifi.radio.android.core.composables.screens
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yazantarifi.radio.RadioApplicationMessages
+import com.yazantarifi.radio.android.core.R
 import com.yazantarifi.radio.android.core.screens.SopifyStateScreen
 import com.yazantarifi.radio.models.RedditFeedPost
 
@@ -32,11 +34,11 @@ fun PostListingComposable(post: RedditFeedPost) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Start,
         ) {
-            ColoredText(message = post.authorFullName ?: "")
+            SeconderyColoredText(message = post.authorFullName ?: "")
             Spacer(modifier = Modifier.width(5.dp))
             ColoredText(message = " ${RadioApplicationMessages.getMessage("in")} ")
             Spacer(modifier = Modifier.width(5.dp))
-            ColoredText(message = "r/${post.subReddit ?: ""}")
+            PrimaryColoredText(message = "r/${post.subReddit ?: ""}")
             if (post.awardings?.isNotEmpty() == true) {
                 Spacer(modifier = Modifier.width(5.dp))
                 post.awardings?.forEach {
@@ -59,21 +61,89 @@ fun PostListingComposable(post: RedditFeedPost) {
         Spacer(modifier = Modifier.height(15.dp))
         post.preview?.images?.get(0)?.source?.let {
             var height = (it.height ?: 0)
-            if (height > 650) {
-                height = 650
+            if (height > 450) {
+                height = 450
             }
 
-            AsyncImage(
-                model = it.getImageUrl(),
-                contentDescription = post.title ?: "",
-                modifier = Modifier
-                    .height(height.dp)
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(3.dp)),
-                contentScale = ContentScale.Crop
-            )
+            if (post.isVideo == false) {
+                AsyncImage(
+                    model = it.getImageUrl(),
+                    contentDescription = post.title ?: "",
+                    modifier = Modifier
+                        .height(height.dp)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(3.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                Box {
+                    AsyncImage(
+                        model = it.getImageUrl(),
+                        contentDescription = post.title ?: "",
+                        modifier = Modifier
+                            .height(height.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(3.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(height.dp)
+                    ) {
+                        AsyncImage(
+                            model = R.drawable.play,
+                            contentDescription = post.title ?: "",
+                            modifier = Modifier
+                                .height(55.dp)
+                        )
+                    }
+                }
+            }
         }
+        
         Spacer(modifier = Modifier.height(15.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                AsyncImage(
+                    model = R.drawable.up,
+                    contentDescription = post.title ?: "",
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(text = RadioApplicationMessages.getMessage("ups") + " : " + post.getUps(), maxLines = 1)
+            }
+
+            Spacer(modifier = Modifier.width(10.dp))
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                AsyncImage(
+                    model = R.drawable.down,
+                    contentDescription = post.title ?: "",
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(text = RadioApplicationMessages.getMessage("downs") + " : " + post.getDowns(), maxLines = 1)
+            }
+
+            Spacer(modifier = Modifier.width(10.dp))
+            Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                AsyncImage(
+                    model = R.drawable.chat,
+                    contentDescription = post.title ?: "",
+                    modifier = Modifier
+                        .height(20.dp)
+                )
+                Text(text = RadioApplicationMessages.getMessage("comments") + " : " + post.getComments(), maxLines = 1)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
         Divider(color = SopifyStateScreen.getGreyColor())
     }
 }

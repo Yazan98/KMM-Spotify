@@ -87,6 +87,6 @@ android {
     namespace = "com.yazantarifi.radio"
     compileSdk = 33
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
     }
 }

@@ -1,6 +1,7 @@
 package com.yazantarifi.radio.android
 
 import androidx.multidex.MultiDexApplication
+import com.google.android.material.color.DynamicColors
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -16,6 +17,7 @@ class RadioApplication: MultiDexApplication(), Thread.UncaughtExceptionHandler {
 
     override fun onCreate() {
         super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
         RadioApplicationConfigurations.applicationLanguage = Locale.getDefault().language
         registerTimberConfiguration()
         initFirebaseConfiguration()

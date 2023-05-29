@@ -77,5 +77,6 @@ com.yazantarifi.radio.android.androidApp-debug-75 /Users/yazantarifi/Development
 com.yazantarifi.radio.android.androidApp-main-76 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/src/main/res
 com.yazantarifi.radio.android.androidApp-packaged_res-77 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidFeatures/auth/build/intermediates/packaged_res/debug
 com.yazantarifi.radio.android.androidApp-packaged_res-78 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidFeatures/core/build/intermediates/packaged_res/debug
-com.yazantarifi.radio.android.androidApp-packaged_res-79 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/shared/build/intermediates/packaged_res/debug
-com.yazantarifi.radio.android.androidApp-packaged_res-80 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/sopify/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-79 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidFeatures/home/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-80 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/shared/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-81 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/sopify/build/intermediates/packaged_res/debug

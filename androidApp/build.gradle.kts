@@ -13,7 +13,7 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.yazantarifi.radio.android"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"

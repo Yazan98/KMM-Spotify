@@ -2,6 +2,7 @@ package com.yazantarifi.radio.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.round
 
 @Serializable
 data class RedditFeedResponse(
@@ -31,6 +32,7 @@ data class RedditFeedPost(
     @SerialName("post_hint") val postType: String? = "",
     @SerialName("thumbnail") val image: String? = "",
     @SerialName("ups") val upVotes: Long? = 0L,
+    @SerialName("downs") val downVotes: Long? = 0L,
     @SerialName("score") val score: Long? = 0L,
     @SerialName("subreddit_subscribers") val subRedditSubscribers: Long? = 0L,
     @SerialName("upvote_ratio") val upVotesRatio: Double? = 0.0,
@@ -43,11 +45,50 @@ data class RedditFeedPost(
     @SerialName("num_comments") val comments: Int? = 0,
     @SerialName("thumbnail_height") val imageHeight: Int? = 0,
     @SerialName("thumbnail_width") val imageWidth: Int? = 0,
+    @SerialName("is_video") val isVideo: Boolean? = false,
     @SerialName("all_awardings") val awardings: List<RedditPostAwardings>? = null,
     @SerialName("preview") val preview: RedditPostPreviewMedia? = null,
     @SerialName("media") val media: RedditPostVideoContainer? = null,
     @SerialName("secure_media") val securedMedia: RedditPostVideoContainer? = null
-)
+) {
+    fun getUps(): String {
+        return addCommasToNumber((upVotes ?: 0).toDouble()).replace(".0", "")
+
+    }
+
+    fun getDowns(): String {
+        return addCommasToNumber((downVotes ?: 0).toDouble()).replace(".0", "")
+
+    }
+
+    fun getComments(): String {
+        return addCommasToNumber((comments ?: 0).toDouble()).replace(".0", "")
+    }
+
+    private fun addCommasToNumber(number: Double): String {
+        val numberString = number.toString()
+        val parts = numberString.split(".")
+        val integerPart = parts[0]
+        val decimalPart = if (parts.size > 1) ".${parts[1]}" else ""
+
+        val integerWithCommas = addCommasToIntegerPart(integerPart)
+        return "$integerWithCommas$decimalPart"
+    }
+
+    private fun addCommasToIntegerPart(integerPart: String): String {
+        val reversed = integerPart.reversed()
+        val stringBuilder = StringBuilder()
+
+        for (i in reversed.indices) {
+            stringBuilder.append(reversed[i])
+            if ((i + 1) % 3 == 0 && i != reversed.length - 1) {
+                stringBuilder.append(",")
+            }
+        }
+
+        return stringBuilder.reverse().toString()
+    }
+}
 
 @Serializable
 data class RedditPostVideoContainer(
@@ -84,7 +125,6 @@ data class RedditPostImageSource(
 
 @Serializable
 data class RedditPostAwardings(
-    @SerialName("is_video") val isVideo: Boolean? = false,
     @SerialName("icon_url") val url: String? = "",
     @SerialName("author") val author: String? = "",
     @SerialName("id") val id: String? = "",

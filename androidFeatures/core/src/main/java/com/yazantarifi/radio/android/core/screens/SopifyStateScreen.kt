@@ -9,8 +9,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -38,38 +40,42 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
                 val scaffoldState = rememberScaffoldState()
                 val coroutineScope = rememberCoroutineScope()
 
-                Scaffold(
-                    modifier = Modifier.background(getBackgroundColor()),
-                    scaffoldState = scaffoldState,
-                    topBar = {
-                        if (isDefaultToolbarEnabled()) {
-                            ApplicationDefaultToolbar()
-                        } else {
-                            getCustomToolbarComposable()
-                        }
-                    },
-                    bottomBar = {
-                        if (isBottomBarEnabled()) {
-                            SopifyBottomBarComposable()
-                        }
-                    }
+                Surface(
+                    color = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Box(modifier = Modifier.padding(it)) {
-                        onScreenContent(savedInstanceState).apply {
-                            setupErrorListeners(this)
-
-                            val isErrorMessageExists = !TextUtils.isEmpty(errorMessageListener.value)
-                            if (isErrorMessageExists) {
-                                coroutineScope.launch {
-                                    scaffoldState.snackbarHostState.showSnackbar(errorMessageListener.value ?: "")
-                                    errorMessageListener.value = ""
-                                }
+                    Scaffold(
+                        scaffoldState = scaffoldState,
+                        topBar = {
+                            if (isDefaultToolbarEnabled()) {
+                                ApplicationDefaultToolbar()
+                            } else {
+                                getCustomToolbarComposable()
                             }
+                        },
+                        bottomBar = {
+                            if (isBottomBarEnabled()) {
+                                SopifyBottomBarComposable()
+                            }
+                        }
+                    ) {
+                        Box(modifier = Modifier.padding(it)) {
+                            onScreenContent(savedInstanceState).apply {
+                                setupErrorListeners(this)
 
-                            val isErrorScreenExist = errorScreenListener.value != null
-                            if (isErrorScreenExist) {
-                                startActivity(Intent(this@SopifyStateScreen, SopifyErrorScreen::class.java))
-                                errorScreenListener.value = null
+                                val isErrorMessageExists = !TextUtils.isEmpty(errorMessageListener.value)
+                                if (isErrorMessageExists) {
+                                    coroutineScope.launch {
+                                        scaffoldState.snackbarHostState.showSnackbar(errorMessageListener.value ?: "")
+                                        errorMessageListener.value = ""
+                                    }
+                                }
+
+                                val isErrorScreenExist = errorScreenListener.value != null
+                                if (isErrorScreenExist) {
+                                    startActivity(Intent(this@SopifyStateScreen, SopifyErrorScreen::class.java))
+                                    errorScreenListener.value = null
+                                }
                             }
                         }
                     }
@@ -101,10 +107,7 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
 
     @Composable
     protected fun getBackgroundColor(): Color {
-        return when (isSystemInDarkTheme()) {
-            true -> Color(0x00000000)
-            false -> Color(0x00FFFFFF)
-        }
+        return MaterialTheme.colorScheme.background
     }
 
     @Composable
@@ -143,6 +146,14 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
     companion object {
         @Composable
         fun getGreyColor(): Color {
+            return when (isSystemInDarkTheme()) {
+                true -> Color(0xFF000000)
+                false -> Color(0xFFE2E1E1)
+            }
+        }
+
+        @Composable
+        fun getGreyTextColor(): Color {
             return when (isSystemInDarkTheme()) {
                 true -> Color(0xFF000000)
                 false -> Color(0xFFC5C4C4)

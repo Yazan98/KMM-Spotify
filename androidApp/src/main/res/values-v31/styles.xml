@@ -8,11 +8,11 @@
     </style>
 
     <style name="Theme.MainScreen" parent="Base.Theme.App">
-        <item name="android:background">@color/purple_200</item>
-        <item name="android:windowSplashScreenBackground">@color/purple_200</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/common_full_open_on_phone</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:windowSplashScreenBackground">?attr/colorPrimary</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/reddit</item>
         <item name="android:windowSplashScreenAnimationDuration">1000</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">@color/purple_200</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">?attr/colorPrimary</item>
     </style>
 
 </resources>

@@ -12,6 +12,9 @@ object RadioApplicationMessages {
         put("loading_discover:0:en", "Loading Hot News")
         put("loading_discover:1:en", "Loading New News")
         put("loading_discover:2:en", "Loading Top News")
+        put("ups:en", "Likes")
+        put("downs:en", "Dislikes")
+        put("comments:en", "Comments")
     }
 
     fun getMessage(key: String): String {

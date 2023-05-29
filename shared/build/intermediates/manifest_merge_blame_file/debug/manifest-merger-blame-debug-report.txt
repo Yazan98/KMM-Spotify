@@ -2,7 +2,7 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.yazantarifi.radio" >
 4
-5    <uses-sdk android:minSdkVersion="24" />
-5-->/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/shared/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest962849840011635458.xml
+5    <uses-sdk android:minSdkVersion="26" />
+5-->/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/shared/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6936062850432729637.xml
 6
 7</manifest>
