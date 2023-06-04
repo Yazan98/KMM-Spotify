@@ -7,10 +7,11 @@ import com.yazantarifi.kmm.sopy.base.useCases.SopifyState
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseListener
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseType
 import com.yazantarifi.kmm.sopy.base.viewModels.SopifyViewModel
+import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.models.RedditFeedPayload
 import com.yazantarifi.radio.models.RedditFeedPost
 import com.yazantarifi.radio.useCases.GetDiscoverContentUseCase
-import com.yazantarifi.radio.useCases.GetFeedUseCase
+import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,13 +19,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val feedUseCase: GetFeedUseCase,
     private val discoverContentUseCase: GetDiscoverContentUseCase,
+    private val getHomeScreenItems: GetHomeScreenItemsUseCase,
     private val storageProvider: SopifyStorageProvider
 ): SopifyViewModel<HomeAction>() {
 
     val feedLoadingListener by lazy { mutableStateOf(false) }
-    val feedContentListener: MutableState<ArrayList<RedditFeedPost?>> by lazy { mutableStateOf(arrayListOf()) }
+    val feedContentListener: MutableState<ArrayList<RadioHomeItem?>> by lazy { mutableStateOf(arrayListOf()) }
     val discoverContentListener: MutableState<ArrayList<RedditFeedPost?>> by lazy { mutableStateOf(arrayListOf()) }
 
     val discoverFilterSelectedPosition by lazy { mutableStateOf(0) }
@@ -66,8 +67,8 @@ class HomeViewModel @Inject constructor(
 
     private fun onGetHomeScreenFeedInfo() {
         if (feedContentListener.value.isNotEmpty()) return
-        feedUseCase.execute(
-            GetFeedUseCase.RequestValue("", storageProvider.getAccessToken()),
+        getHomeScreenItems.execute(
+            GetHomeScreenItemsUseCase.RequestValue(storageProvider.getAccessToken()),
             object : SopifyUseCaseListener {
                 override fun onStateUpdated(newState: SopifyState) {
                     scope.launch(Dispatchers.Main) {
@@ -75,12 +76,8 @@ class HomeViewModel @Inject constructor(
                             is SopifyState.SopifyEmptyState -> {}
                             is SopifyState.SopifyLoadingState -> feedLoadingListener.value = newState.isLoading
                             is SopifyState.SopifyErrorState -> errorMessageListener.value = newState.exception.message ?: ""
-                            is SopifyState.SopifySuccessState -> (newState.payload as? RedditFeedPayload)?.let {
-                                if (it.isHardReload) {
-                                    feedContentListener.value.clear()
-                                }
-
-                                it.posts?.let { it1 -> feedContentListener.value.addAll(it1) }
+                            is SopifyState.SopifySuccessState -> (newState.payload as? List<RadioHomeItem>)?.let {
+                                feedContentListener.value.addAll(it)
                             }
                         }
                     }
@@ -90,7 +87,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun getSupportedUseCases(): ArrayList<SopifyUseCaseType> {
-        return arrayListOf(feedUseCase, discoverContentUseCase)
+        return arrayListOf(getHomeScreenItems, discoverContentUseCase)
     }
 
 }

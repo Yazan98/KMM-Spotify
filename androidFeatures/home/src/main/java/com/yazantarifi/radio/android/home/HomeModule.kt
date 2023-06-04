@@ -1,7 +1,7 @@
 package com.yazantarifi.radio.android.home
 
 import com.yazantarifi.radio.useCases.GetDiscoverContentUseCase
-import com.yazantarifi.radio.useCases.GetFeedUseCase
+import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +21,8 @@ object HomeModule {
 
     @Provides
     @Singleton
-    fun getGetFeedUseCase(httpClient: HttpClient): GetFeedUseCase {
-        return GetFeedUseCase(httpClient)
+    fun getGetHomeScreenItemsUseCase(httpClient: HttpClient): GetHomeScreenItemsUseCase {
+        return GetHomeScreenItemsUseCase(httpClient)
     }
 
 }

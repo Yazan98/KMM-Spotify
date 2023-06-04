@@ -78,5 +78,6 @@ com.yazantarifi.radio.android.androidApp-main-76 /Users/yazantarifi/KMM-Spotify/
 com.yazantarifi.radio.android.androidApp-packaged_res-77 /Users/yazantarifi/KMM-Spotify/androidFeatures/auth/build/intermediates/packaged_res/debug
 com.yazantarifi.radio.android.androidApp-packaged_res-78 /Users/yazantarifi/KMM-Spotify/androidFeatures/core/build/intermediates/packaged_res/debug
 com.yazantarifi.radio.android.androidApp-packaged_res-79 /Users/yazantarifi/KMM-Spotify/androidFeatures/home/build/intermediates/packaged_res/debug
-com.yazantarifi.radio.android.androidApp-packaged_res-80 /Users/yazantarifi/KMM-Spotify/shared/build/intermediates/packaged_res/debug
-com.yazantarifi.radio.android.androidApp-packaged_res-81 /Users/yazantarifi/KMM-Spotify/sopify/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-80 /Users/yazantarifi/KMM-Spotify/compose/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-81 /Users/yazantarifi/KMM-Spotify/shared/build/intermediates/packaged_res/debug
+com.yazantarifi.radio.android.androidApp-packaged_res-82 /Users/yazantarifi/KMM-Spotify/sopify/build/intermediates/packaged_res/debug

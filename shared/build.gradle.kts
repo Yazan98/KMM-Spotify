@@ -42,8 +42,9 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
                 implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
+
+                implementation(project(mapOf("path" to ":compose")))
                 implementation(project(mapOf("path" to ":sopify")))
-                implementation(project(mapOf("path" to ":shared-compose")))
 
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -55,8 +56,8 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                implementation(project(mapOf("path" to ":compose")))
                 implementation(project(mapOf("path" to ":sopify")))
-                implementation(project(mapOf("path" to ":shared-compose")))
 
                 implementation("io.ktor:ktor-client-android:2.2.1")
                 implementation("io.ktor:ktor-client-json:2.2.1")
@@ -73,8 +74,8 @@ kotlin {
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependencies {
+                implementation(project(":compose"))
                 implementation(project(mapOf("path" to ":sopify")))
-                implementation(project(mapOf("path" to ":shared-compose")))
                 implementation("io.ktor:ktor-client-ios:2.2.1")
                 implementation("io.ktor:ktor-client-darwin:2.2.1")
             }
@@ -83,14 +84,6 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }
@@ -107,3 +100,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+dependencies {
+    implementation(project(mapOf("path" to ":compose")))
+}
+

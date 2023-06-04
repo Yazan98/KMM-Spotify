@@ -9,7 +9,7 @@ MERGED from [:androidFeatures:home] /Users/yazantarifi/KMM-Spotify/androidFeatur
 MERGED from [:androidFeatures:core] /Users/yazantarifi/KMM-Spotify/androidFeatures/core/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:shared] /Users/yazantarifi/KMM-Spotify/shared/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:sopify] /Users/yazantarifi/KMM-Spotify/sopify/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:shared-compose] /Users/yazantarifi/KMM-Spotify/shared-compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:compose] /Users/yazantarifi/KMM-Spotify/compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.accompanist:accompanist-pager-indicators:0.24.8-beta] /Users/yazantarifi/.gradle/caches/transforms-3/b801a1e0398065a6920cead60b1d93e8/transformed/jetified-accompanist-pager-indicators-0.24.8-beta/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.material3:material3:1.0.0-alpha11] /Users/yazantarifi/.gradle/caches/transforms-3/75294cfbfed75661a7129a2a5db8d7fa/transformed/jetified-material3-1.0.0-alpha11/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.material:material-ripple:1.4.1] /Users/yazantarifi/.gradle/caches/transforms-3/76b5ba3223b03e2c2a34151079eca3cb/transformed/jetified-material-ripple-1.4.1/AndroidManifest.xml:17:1-22:12
@@ -17,6 +17,7 @@ MERGED from [androidx.compose.material:material-icons-core:1.4.1] /Users/yazanta
 MERGED from [androidx.compose.material:material:1.4.1] /Users/yazantarifi/.gradle/caches/transforms-3/816057e2b6abcb6f2b50e2d6bfbfd2cb/transformed/jetified-material-1.4.1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.accompanist:accompanist-pager:0.24.8-beta] /Users/yazantarifi/.gradle/caches/transforms-3/b17f560b2858605308221b18a6cb3a19/transformed/jetified-accompanist-pager-0.24.8-beta/AndroidManifest.xml:17:1-24:12
 MERGED from [org.jetbrains.compose.components:library-android:1.4.0] /Users/yazantarifi/.gradle/caches/transforms-3/50499edfdbb11f33f29f395cfcc28e12/transformed/jetified-library-release/AndroidManifest.xml:2:1-9:12
+MERGED from [media.kamel:kamel-image-android-debug:0.5.0] /Users/yazantarifi/.gradle/caches/transforms-3/e3971acc2e9ecc1d0d042dc76a01e1d8/transformed/jetified-kamel-image-debug/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.0.0] /Users/yazantarifi/.gradle/caches/transforms-3/b010fd98e8b162930c536feb99c72d64/transformed/jetified-hilt-navigation-compose-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-compose:2.5.3] /Users/yazantarifi/.gradle/caches/transforms-3/ca0383369bb49ea5ce8b8a697a225061/transformed/jetified-navigation-compose-2.5.3/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.animation:animation-core:1.4.1] /Users/yazantarifi/.gradle/caches/transforms-3/27a065d2541e404b8e43590e7580ec95/transformed/jetified-animation-core-1.4.1/AndroidManifest.xml:17:1-22:12
@@ -399,8 +400,8 @@ MERGED from [:shared] /Users/yazantarifi/KMM-Spotify/shared/build/intermediates/
 MERGED from [:shared] /Users/yazantarifi/KMM-Spotify/shared/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:sopify] /Users/yazantarifi/KMM-Spotify/sopify/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:sopify] /Users/yazantarifi/KMM-Spotify/sopify/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:shared-compose] /Users/yazantarifi/KMM-Spotify/shared-compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:shared-compose] /Users/yazantarifi/KMM-Spotify/shared-compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:compose] /Users/yazantarifi/KMM-Spotify/compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:compose] /Users/yazantarifi/KMM-Spotify/compose/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [com.google.accompanist:accompanist-pager-indicators:0.24.8-beta] /Users/yazantarifi/.gradle/caches/transforms-3/b801a1e0398065a6920cead60b1d93e8/transformed/jetified-accompanist-pager-indicators-0.24.8-beta/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.accompanist:accompanist-pager-indicators:0.24.8-beta] /Users/yazantarifi/.gradle/caches/transforms-3/b801a1e0398065a6920cead60b1d93e8/transformed/jetified-accompanist-pager-indicators-0.24.8-beta/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.material3:material3:1.0.0-alpha11] /Users/yazantarifi/.gradle/caches/transforms-3/75294cfbfed75661a7129a2a5db8d7fa/transformed/jetified-material3-1.0.0-alpha11/AndroidManifest.xml:20:5-22:41
@@ -415,6 +416,8 @@ MERGED from [com.google.accompanist:accompanist-pager:0.24.8-beta] /Users/yazant
 MERGED from [com.google.accompanist:accompanist-pager:0.24.8-beta] /Users/yazantarifi/.gradle/caches/transforms-3/b17f560b2858605308221b18a6cb3a19/transformed/jetified-accompanist-pager-0.24.8-beta/AndroidManifest.xml:20:5-22:41
 MERGED from [org.jetbrains.compose.components:library-android:1.4.0] /Users/yazantarifi/.gradle/caches/transforms-3/50499edfdbb11f33f29f395cfcc28e12/transformed/jetified-library-release/AndroidManifest.xml:5:5-7:41
 MERGED from [org.jetbrains.compose.components:library-android:1.4.0] /Users/yazantarifi/.gradle/caches/transforms-3/50499edfdbb11f33f29f395cfcc28e12/transformed/jetified-library-release/AndroidManifest.xml:5:5-7:41
+MERGED from [media.kamel:kamel-image-android-debug:0.5.0] /Users/yazantarifi/.gradle/caches/transforms-3/e3971acc2e9ecc1d0d042dc76a01e1d8/transformed/jetified-kamel-image-debug/AndroidManifest.xml:5:5-44
+MERGED from [media.kamel:kamel-image-android-debug:0.5.0] /Users/yazantarifi/.gradle/caches/transforms-3/e3971acc2e9ecc1d0d042dc76a01e1d8/transformed/jetified-kamel-image-debug/AndroidManifest.xml:5:5-44
 MERGED from [androidx.hilt:hilt-navigation-compose:1.0.0] /Users/yazantarifi/.gradle/caches/transforms-3/b010fd98e8b162930c536feb99c72d64/transformed/jetified-hilt-navigation-compose-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.hilt:hilt-navigation-compose:1.0.0] /Users/yazantarifi/.gradle/caches/transforms-3/b010fd98e8b162930c536feb99c72d64/transformed/jetified-hilt-navigation-compose-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.navigation:navigation-compose:2.5.3] /Users/yazantarifi/.gradle/caches/transforms-3/ca0383369bb49ea5ce8b8a697a225061/transformed/jetified-navigation-compose-2.5.3/AndroidManifest.xml:20:5-22:41

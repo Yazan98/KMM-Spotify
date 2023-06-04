@@ -97,7 +97,7 @@ dependencies {
     implementation(project(":androidFeatures:auth"))
     implementation(project(":androidFeatures:core"))
     implementation(project(":androidFeatures:home"))
-    implementation(project(mapOf("path" to ":shared-compose")))
+    implementation(project(mapOf("path" to ":compose")))
 
     implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
     constraints {

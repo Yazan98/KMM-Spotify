@@ -63,7 +63,7 @@ dependencies {
 
     implementation(project(":shared"))
     implementation(project(":sopify"))
-    implementation(project(mapOf("path" to ":shared-compose")))
+    implementation(project(mapOf("path" to ":compose")))
 
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")

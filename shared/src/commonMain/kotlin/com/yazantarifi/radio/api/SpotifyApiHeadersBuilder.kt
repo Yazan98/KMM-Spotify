@@ -6,4 +6,10 @@ object SpotifyApiHeadersBuilder {
             "Authorization" to "Basic MWZjYTE1MDIyMDhlNDRhNWI3YmU4YWE5MTliYTU4YmM6YzBhMzM2Y2JlODY0NDNiYWE1MDFmYmEwOGVlNDMxMmY="
         )
     }
+
+    fun getApplicationBearerTokenHeaders(token: String): List<Pair<String, String>> {
+        return arrayListOf(
+            "Authorization" to "Bearer $token"
+        )
+    }
 }
