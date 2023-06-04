@@ -2,7 +2,7 @@ package com.yazantarifi.radio.useCases
 
 import com.yazantarifi.kmm.sopy.api.SopifyRequestListener
 import com.yazantarifi.kmm.sopy.base.useCases.useCasesTypes.SopifyUseCase
-import com.yazantarifi.radio.api.home.HomeScreenDiscoverApiRequest
+//import com.yazantarifi.radio.api.home.HomeScreenDiscoverApiRequest
 import com.yazantarifi.radio.models.RedditFeedPayload
 import com.yazantarifi.radio.models.RedditFeedResponse
 import io.ktor.client.HttpClient
@@ -11,9 +11,9 @@ class GetDiscoverContentUseCase constructor(
     private val httpClient: HttpClient
 ): SopifyUseCase<GetDiscoverContentUseCase.RequestParams, RedditFeedPayload>() {
 
-    private val discoverApiInstance: HomeScreenDiscoverApiRequest by lazy {
-        HomeScreenDiscoverApiRequest()
-    }
+//    private val discoverApiInstance: HomeScreenDiscoverApiRequest by lazy {
+//        HomeScreenDiscoverApiRequest()
+//    }
 
     data class RequestParams(
         val token: String,
@@ -32,7 +32,7 @@ class GetDiscoverContentUseCase constructor(
 
     override fun clear() {
         super.clear()
-        discoverApiInstance.clear()
+//        discoverApiInstance.clear()
     }
 
     override suspend fun build(requestValue: RequestParams) {
@@ -42,28 +42,28 @@ class GetDiscoverContentUseCase constructor(
             DiscoverKeys.NEW -> "new"
         }
 
-        discoverApiInstance.addHttpClient(httpClient)
-        if (discoverApiInstance.isRequestListenerAttachNeeded()) {
-            discoverApiInstance.addRequestListener(object :
-                SopifyRequestListener<RedditFeedResponse> {
-                override fun onSuccess(responseValue: RedditFeedResponse) {
-                    onSubmitSuccessState(RedditFeedPayload(true, responseValue.payload?.children?.map { it.post }))
-                    onSubmitLoadingState(false)
-                }
-
-                override fun onError(error: Throwable) {
-                    onSubmitLoadingState(false)
-                    onSubmitExceptionState(error)
-                }
-            })
-        }
-
-        onSubmitLoadingState(true)
-        discoverApiInstance.executeRequest(
-            HomeScreenDiscoverApiRequest.RequestParams(
-                requestValue.token,
-                requestKey
-            )
-        )
+//        discoverApiInstance.addHttpClient(httpClient)
+//        if (discoverApiInstance.isRequestListenerAttachNeeded()) {
+//            discoverApiInstance.addRequestListener(object :
+//                SopifyRequestListener<RedditFeedResponse> {
+//                override fun onSuccess(responseValue: RedditFeedResponse) {
+//                    onSubmitSuccessState(RedditFeedPayload(true, responseValue.payload?.children?.map { it.post }))
+//                    onSubmitLoadingState(false)
+//                }
+//
+//                override fun onError(error: Throwable) {
+//                    onSubmitLoadingState(false)
+//                    onSubmitExceptionState(error)
+//                }
+//            })
+//        }
+//
+//        onSubmitLoadingState(true)
+//        discoverApiInstance.executeRequest(
+//            HomeScreenDiscoverApiRequest.RequestParams(
+//                requestValue.token,
+//                requestKey
+//            ), arrayListOf()
+//        )
     }
 }

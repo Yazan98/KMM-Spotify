@@ -21,8 +21,8 @@ import com.yazantarifi.kmm.sopy.base.useCases.SopifyState
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseListener
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.ui.SopifyScreenNavigation
-import com.yazantarifi.radio.api.RedditAuthManager
-import com.yazantarifi.radio.models.RedditAuthResponse
+import com.yazantarifi.radio.api.SpotifyAuthManager
+import com.yazantarifi.radio.models.SpotifyAuthResponse
 import com.yazantarifi.radio.useCases.GetAccessTokenUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +37,7 @@ class RadioAuthScreen: AppCompatActivity() {
 
     @Inject
     lateinit var authUseCase: GetAccessTokenUseCase
-    private val authManager by lazy { RedditAuthManager() }
+    private val authManager by lazy { SpotifyAuthManager() }
     companion object {
         fun startScreen(context: ComponentActivity) {
             context.startActivity(Intent(context, RadioAuthScreen::class.java))
@@ -99,7 +99,7 @@ class RadioAuthScreen: AppCompatActivity() {
                 when (newState) {
                     is SopifyState.SopifyEmptyState -> {}
                     is SopifyState.SopifyErrorState -> onShowErrorMessage(newState.exception.message ?: "Unexpected Error")
-                    is SopifyState.SopifySuccessState -> onAccountLoggedInMessage(newState.payload as RedditAuthResponse)
+                    is SopifyState.SopifySuccessState -> onAccountLoggedInMessage(newState.payload as SpotifyAuthResponse)
                     is SopifyState.SopifyLoadingState -> lifecycleScope.launch(Dispatchers.Main) {
                         loadingView.visibility = if (newState.isLoading) View.VISIBLE else View.GONE
                     }
@@ -108,7 +108,7 @@ class RadioAuthScreen: AppCompatActivity() {
         })
     }
 
-    private fun onAccountLoggedInMessage(info: RedditAuthResponse) {
+    private fun onAccountLoggedInMessage(info: SpotifyAuthResponse) {
         storage.insertAccessToken(info.accessToken ?: "")
         storage.updateLoggedInUser(true)
         Snackbar.make(

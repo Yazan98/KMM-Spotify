@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.compose")
 }
 
 android {
@@ -28,7 +29,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     packagingOptions {
@@ -57,6 +63,7 @@ dependencies {
 
     implementation(project(":shared"))
     implementation(project(":sopify"))
+    implementation(project(mapOf("path" to ":shared-compose")))
 
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")

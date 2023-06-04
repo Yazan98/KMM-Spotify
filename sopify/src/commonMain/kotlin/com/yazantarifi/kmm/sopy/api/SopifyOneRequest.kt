@@ -17,6 +17,8 @@ abstract class SopifyOneRequest<RequestBody, ResponseValue>: SopifyRequestManage
         requestListener = null
     }
 
-    abstract suspend fun executeRequest(requestBody: RequestBody)
+    protected abstract fun getRequestUrl(): String
+
+    abstract suspend fun executeRequest(requestBody: RequestBody, headers: List<Pair<String, String>>)
 
 }

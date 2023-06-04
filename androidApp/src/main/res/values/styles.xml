@@ -1,6 +1,7 @@
 <resources>
 
     <style name="AuthScreen" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/green</item>
     </style>
 
     <style name="Base.Theme.App" parent="ThemeOverlay.Material3.DynamicColors.DayNight">

@@ -6,6 +6,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.dagger.hilt.android")
     id("dagger.hilt.android.plugin")
+    id("org.jetbrains.compose")
 }
 
 android {
@@ -53,7 +54,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     packagingOptions {
@@ -91,6 +97,8 @@ dependencies {
     implementation(project(":androidFeatures:auth"))
     implementation(project(":androidFeatures:core"))
     implementation(project(":androidFeatures:home"))
+    implementation(project(mapOf("path" to ":shared-compose")))
+
     implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {

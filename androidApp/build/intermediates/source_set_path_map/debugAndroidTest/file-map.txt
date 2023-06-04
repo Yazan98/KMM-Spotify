@@ -1,4 +1,0 @@
-com.yazantarifi.radio.android.test.androidApp-androidTest-0 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/generated/res/resValues/androidTest/debug
-com.yazantarifi.radio.android.test.androidApp-mergeDebugAndroidTestResources-1 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
-com.yazantarifi.radio.android.test.androidApp-mergeDebugAndroidTestResources-2 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
-com.yazantarifi.radio.android.test.androidApp-merged_res-3 /Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/merged_res/debugAndroidTest

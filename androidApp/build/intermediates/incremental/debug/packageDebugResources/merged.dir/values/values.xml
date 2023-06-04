@@ -4,7 +4,7 @@
     <color name="black">#FF000000</color>
     <color name="gray">#888888</color>
     <color name="gray_2">#DCDCDC</color>
-    <color name="green">#4CAF50</color>
+    <color name="green">#3DDC84</color>
     <color name="md_theme_dark_onPrimary">#381E72</color>
     <color name="md_theme_dark_onPrimaryContainer">#EADDFF</color>
     <color name="md_theme_dark_onSecondary">#332D41</color>
@@ -41,6 +41,7 @@
     <string name="google_storage_bucket" translatable="false">radio-app-e0e5b.appspot.com</string>
     <string name="project_id" translatable="false">radio-app-e0e5b</string>
     <style name="AuthScreen" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/green</item>
     </style>
     <style name="Base.Theme.App" parent="ThemeOverlay.Material3.DynamicColors.DayNight">
 

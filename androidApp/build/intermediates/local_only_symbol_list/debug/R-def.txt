@@ -32,8 +32,11 @@ color teal_200
 color teal_700
 color title
 color white
-drawable reddit
+drawable app_logo_background
 font app_font
+mipmap app_logo
+mipmap app_logo_foreground
+mipmap app_logo_round
 mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round

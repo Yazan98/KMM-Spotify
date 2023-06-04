@@ -1,7 +1,0 @@
-#Fri May 26 17:23:41 EET 2023
-base.0=/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
-base.1=/Users/yazantarifi/DevelopmentProjects/KMM-Reddit/androidApp/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/11/classes.dex
-path.0=0/classes.dex
-path.1=11/classes.dex
-renamed.0=classes.dex
-renamed.1=classes2.dex

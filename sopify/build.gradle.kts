@@ -3,14 +3,14 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlinx-serialization")
-    id("io.realm.kotlin")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = org.jetbrains.kotlin.config.JvmTarget.JVM_17.description
             }
         }
     }
@@ -25,6 +25,7 @@ kotlin {
         ios.deploymentTarget = "14.1"
         framework {
             baseName = "sopy"
+            isStatic = true
         }
     }
 
@@ -38,7 +39,12 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
                 implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
-                implementation("io.realm.kotlin:library-base:1.4.0")
+
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
             }
         }
 
@@ -81,5 +87,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 26
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }

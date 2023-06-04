@@ -1,32 +1,29 @@
 package com.yazantarifi.radio.api
 
-class RedditAuthManager {
+class SpotifyAuthManager {
 
     companion object {
-        const val CLIENT_ID = "4hZ_IP2WqOXhatcxuw8vow"
-        const val CLIENT_SECRETE = "TbO_mLm13pDDMOK9ztyryPVOo0-JlA"
+        const val CLIENT_ID = "1fca1502208e44a5b7be8aa919ba58bc"
+        const val SECRETE_KEY = "c0a336cbe86443baa501fba08ee4312f"
     }
 
     fun getAuthLoginUrl(): String {
-        val state = "random_state_value"
-        val redirectUri = "https://github.com/Yazan98/KMM-Reddit"
-        val scopes = "identity read"
-
-        return "https://www.reddit.com/api/v1/authorize" +
+        val scopeList = "user-read-private,user-read-email"
+        return "https://accounts.spotify.com/authorize" +
                 "?client_id=$CLIENT_ID" +
                 "&response_type=code" +
-                "&state=$state" +
-                "&redirect_uri=$redirectUri" +
-                "&duration=permanent" +
-                "&scope=$scopes"
+                "&redirect_uri=http://localhost" +
+                "&scope=$scopeList" +
+                "&state=Yazan98 Random String Here"
     }
 
     fun isAccessTokenUrl(url: String): Boolean {
-        return url.contains("https://github.com/Yazan98/KMM-Reddit?state=random_state_value&code=")
+        return url.contains("http://localhost/?code=")
     }
 
     fun getAccessTokenByUrl(url: String): String {
-        return url.replace("https://github.com/Yazan98/KMM-Reddit?state=random_state_value&code=", "")
+        val codeStart = url.replace("http://localhost/?code=", "")
+        return codeStart.split("&state=")[0]
     }
 
 }

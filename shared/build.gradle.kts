@@ -1,16 +1,18 @@
+import org.jetbrains.kotlin.config.JvmTarget
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
     id("kotlinx-serialization")
-    id("io.realm.kotlin")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = JvmTarget.JVM_17.description
             }
         }
     }
@@ -26,6 +28,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
+            isStatic = true
         }
     }
     
@@ -39,14 +42,22 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
                 implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
-                implementation("io.realm.kotlin:library-base:1.4.0")
                 implementation(project(mapOf("path" to ":sopify")))
+                implementation(project(mapOf("path" to ":shared-compose")))
+
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
             }
         }
 
         val androidMain by getting {
             dependencies {
                 implementation(project(mapOf("path" to ":sopify")))
+                implementation(project(mapOf("path" to ":shared-compose")))
+
                 implementation("io.ktor:ktor-client-android:2.2.1")
                 implementation("io.ktor:ktor-client-json:2.2.1")
                 implementation("io.ktor:ktor-client-serialization-jvm:2.2.1")
@@ -63,6 +74,7 @@ kotlin {
         val iosMain by creating {
             dependencies {
                 implementation(project(mapOf("path" to ":sopify")))
+                implementation(project(mapOf("path" to ":shared-compose")))
                 implementation("io.ktor:ktor-client-ios:2.2.1")
                 implementation("io.ktor:ktor-client-darwin:2.2.1")
             }
@@ -88,5 +100,10 @@ android {
     compileSdk = 33
     defaultConfig {
         minSdk = 26
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
