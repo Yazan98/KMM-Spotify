@@ -5,21 +5,32 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.yazantarifi.radio.core.shared.compose.components.composables.getSecondTextColor
 import com.yazantarifi.radio.core.shared.compose.components.composables.getTextColor
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 
 @Composable
-fun HomeChangeLayoutComposable(item: HomeLayoutDesignItem, onChangeLayoutClickListener: (Int) -> Unit) {
+fun HomeChangeLayoutComposable(
+    selectedIconFilter: Int,
+    item: HomeLayoutDesignItem,
+    onChangeLayoutClickListener: (Int) -> Unit
+) {
     Row(modifier = Modifier.fillMaxWidth().padding(10.dp), horizontalArrangement = Arrangement.SpaceBetween) {
         Text(item.title, color = getTextColor(), fontSize = TextUnit(12f, TextUnitType.Sp))
-        Text("Change Layout", color = getTextColor(), fontSize = TextUnit(12f, TextUnitType.Sp), modifier = Modifier.clickable {
-            onChangeLayoutClickListener(HomeLayoutDesignItem.SCROLL_V)
-        })
+        Row {
+            Icon(Icons.Default.List, contentDescription = "List Icon", modifier = Modifier.size(20.dp).clickable {  onChangeLayoutClickListener(HomeLayoutDesignItem.SCROLL_H) }, tint = if (selectedIconFilter == HomeLayoutDesignItem.SCROLL_H) getTextColor() else getSecondTextColor())
+            Icon(Icons.Default.MoreVert, contentDescription = "Grid Icon", modifier = Modifier.size(20.dp).clickable {  onChangeLayoutClickListener(HomeLayoutDesignItem.SCROLL_V) }, tint = if (selectedIconFilter == HomeLayoutDesignItem.SCROLL_V) getTextColor() else getSecondTextColor())
+        }
     }
 }

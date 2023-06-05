@@ -13,6 +13,7 @@ import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategorie
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeNotificationPermissionItem
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeOpenSpotifyAppItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
@@ -243,6 +244,12 @@ class GetHomeScreenItemsUseCase constructor(
             RadioApplicationMessages.getMessage("top_workout"),
             "0JQ5DAqbMKFAXlCG6QvYQ4"
         ), headers)
+
+        screenItems.add(HomeOpenSpotifyAppItem(
+            RadioApplicationMessages.getMessage("spotify_app_open_title"),
+            RadioApplicationMessages.getMessage("spotify_app_open_message"),
+            RadioApplicationMessages.getMessage("spotify_app_open_button"),
+        ))
 
         onSubmitLoadingState(false)
         onSubmitSuccessState(screenItems)

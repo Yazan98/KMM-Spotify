@@ -63,12 +63,13 @@ data class HomeNotificationPermissionItem(
     }
 }
 
-data class HomeRateAppItem(
+data class HomeOpenSpotifyAppItem(
     val title: String,
-    val description: String
+    val description: String,
+    val buttonText: String
 ): RadioHomeItem {
     override fun getItemViewType(): Int {
-        return RadioHomeItem.TYPE_RATE_APP
+        return RadioHomeItem.TYPE_OPEN_SPOTIFY_APP
     }
 }
 
