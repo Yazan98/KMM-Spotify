@@ -85,7 +85,8 @@ class GetHomeScreenItemsUseCase constructor(
                                 image = imageUrl,
                                 name = playlist.name ?: "",
                                 ownerName = playlist.owner?.name,
-                                numberOfTracks = playlist.tracks?.total ?: 0
+                                numberOfTracks = playlist.tracks?.total ?: 0,
+                                RadioApplicationMessages.getMessage("loading_image")
                             )
                         })
                     }
@@ -121,7 +122,8 @@ class GetHomeScreenItemsUseCase constructor(
                                 image = imageUrl ?: "",
                                 releaseDate = album.releaseDate ?: "",
                                 numberOfTracks = album.numberOfTracks ?: 0,
-                                artists = album.artists?.map { it.name ?: "" } ?: arrayListOf()
+                                artists = album.artists?.map { it.name ?: "" } ?: arrayListOf(),
+                                loadingMessage = RadioApplicationMessages.getMessage("loading_image"),
                             )
                         })
                     }
@@ -154,7 +156,8 @@ class GetHomeScreenItemsUseCase constructor(
                             RadioCategoryItem(
                                 it.id ?: "",
                                 it.name ?: "",
-                                imageUrl
+                                imageUrl,
+                                RadioApplicationMessages.getMessage("loading_image")
                             )
                         })
                     }
@@ -189,7 +192,8 @@ class GetHomeScreenItemsUseCase constructor(
                                 image = imageUrl,
                                 name = playlist.name ?: "",
                                 ownerName = playlist.owner?.name,
-                                numberOfTracks = playlist.tracks?.total ?: 0
+                                numberOfTracks = playlist.tracks?.total ?: 0,
+                                RadioApplicationMessages.getMessage("loading_image")
                             )
                         })
                     }

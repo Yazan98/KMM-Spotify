@@ -2,7 +2,6 @@ package com.yazantarifi.radio.core.shared.compose.components.models
 
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
-import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioMusicItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
 
 data class HomeHeaderItem(
@@ -12,6 +11,31 @@ data class HomeHeaderItem(
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_HEADER
     }
+
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
+    }
+}
+
+data class HomeSectionHeaderItem(
+    val sectionName: String
+): RadioHomeItem {
+    override fun getItemViewType(): Int {
+        return RadioHomeItem.TYPE_SECTION_HEADER
+    }
+
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
+    }
+
 }
 
 data class HomeLayoutDesignItem(
@@ -27,14 +51,13 @@ data class HomeLayoutDesignItem(
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_LAYOUT_DESIGN
     }
-}
 
-data class HomeMusicItem(
-    val title: String,
-    val items: List<RadioMusicItem>
-): RadioHomeItem {
-    override fun getItemViewType(): Int {
-        return RadioHomeItem.TYPE_MUSIC_LIST_SCROLL
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
     }
 }
 
@@ -45,6 +68,14 @@ data class HomeCategoriesItem(
 ): RadioHomeItem {
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_LIST_CATEGORIES
+    }
+
+    override fun isMultiItems(): Boolean {
+        return true
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return items
     }
 }
 
@@ -61,6 +92,14 @@ data class HomeNotificationPermissionItem(
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION
     }
+
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
+    }
 }
 
 data class HomeOpenSpotifyAppItem(
@@ -71,6 +110,14 @@ data class HomeOpenSpotifyAppItem(
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_OPEN_SPOTIFY_APP
     }
+
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
+    }
 }
 
 data class HomePlaylistsItem(
@@ -79,7 +126,15 @@ data class HomePlaylistsItem(
     val playlists: List<RadioPlaylist>? = null
 ): RadioHomeItem {
     override fun getItemViewType(): Int {
-        return RadioHomeItem.TYPE_PLAYLIST
+        return RadioHomeItem.TYPE_LIST_H_PLAYLIST
+    }
+
+    override fun isMultiItems(): Boolean {
+        return true
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return playlists ?: arrayListOf()
     }
 }
 
@@ -91,4 +146,13 @@ data class HomeAlbumsItem(
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_ALBUMS
     }
+
+    override fun isMultiItems(): Boolean {
+        return true
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return list
+    }
+
 }
