@@ -35,8 +35,8 @@ import kotlinx.coroutines.launch
 
 abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: ComponentActivity() {
 
-    private val errorScreenListener: MutableState<Throwable?> by lazy { mutableStateOf(null) }
-    private val errorScreenMessageListener: MutableState<String?> by lazy { mutableStateOf(null) }
+    protected val errorScreenListener: MutableState<Throwable?> by lazy { mutableStateOf(null) }
+    protected val errorScreenMessageListener: MutableState<String?> by lazy { mutableStateOf(null) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

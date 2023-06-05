@@ -1,13 +1,15 @@
 package com.yazantarifi.radio.android.home.composables
 
+import android.app.NotificationManager
 import android.content.Context
-import android.widget.Toast
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.composables.RadioApplicationLoadingComposable
+import com.yazantarifi.radio.android.home.RadioHomeScreen
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeAlbumComposable
@@ -48,10 +51,14 @@ import com.yazantarifi.radio.mappers.HomeScreenVerticalGridMapper
 import kotlinx.coroutines.flow.update
 
 @Composable
-fun FeedComposable(viewModel: HomeViewModel) {
+fun FeedComposable(viewModel: HomeViewModel, isNotificationPermissionEnabledListener: Boolean) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.execute(HomeAction.GetFeed(context))
+    }
+
+    if (isNotificationPermissionEnabledListener) {
+        viewModel.execute(HomeAction.RemoveNotificationPermissionAction)
     }
 
     var selectedListLayoutDesign by remember {
@@ -145,6 +152,20 @@ private fun openSpotifyApplication(context: Context, viewModel: HomeViewModel) {
 private fun onNotificationPermissionClickListener(isEnableButton: Boolean, viewModel: HomeViewModel, context: Context) {
     when (isEnableButton) {
         false -> viewModel.execute(HomeAction.RemoveNotificationPermissionAction)
-        true -> {}
+        true -> {
+            val notificationManager = context.getSystemService(NotificationManager::class.java)
+            if (notificationManager.areNotificationsEnabled()) {
+                // Notification permission already granted
+                viewModel.execute(HomeAction.RemoveNotificationPermissionAction)
+            } else {
+                // Request notification permission
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", context.packageName, null)
+                intent.data = uri
+
+                (context as? RadioHomeScreen)?.executePermission(intent)
+
+            }
+        }
     }
 }

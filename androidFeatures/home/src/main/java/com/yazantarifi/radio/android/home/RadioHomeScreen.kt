@@ -1,8 +1,11 @@
 package com.yazantarifi.radio.android.home
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -18,7 +21,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.core.app.NotificationManagerCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,11 +36,21 @@ import com.yazantarifi.radio.android.home.composables.FeedComposable
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
 
+    private val isNotificationPermissionEnabled = mutableStateOf(false)
     private var navController: NavHostController? = null
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        onPermissionResult(result.resultCode == RESULT_OK)
+    }
+
+    private val requestNotificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted->
+        onPermissionResult(isGranted)
+    }
+
     companion object {
         fun startScreen(context: ComponentActivity) {
             context.startActivity(Intent(context, RadioHomeScreen::class.java))
@@ -47,12 +62,16 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
     override fun onScreenContent(savedInstanceState: Bundle?): HomeViewModel {
         navController = rememberNavController()
         val viewModel: HomeViewModel = hiltViewModel()
+        val isNotificationPermissionEnabledListener by remember {
+            isNotificationPermissionEnabled
+        }
+
         NavHost(
             navController = navController!!,
             startDestination = "home",
             modifier = Modifier.background(getBackgroundColor())
         ) {
-            composable("home") { FeedComposable(viewModel) }
+            composable("home") { FeedComposable(viewModel, isNotificationPermissionEnabledListener) }
             composable("discover") { CategoriesComposable(viewModel) }
             composable("account") { AccountComposable(viewModel) }
         }
@@ -108,6 +127,35 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
 
     override fun isBottomBarEnabled(): Boolean {
         return true
+    }
+
+    fun executePermission(intent: Intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestNotificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            requestPermissionLauncher.launch(intent)
+        }
+    }
+
+    /**
+     * This Should not be the Case in Realworld App, it's Only for Demo
+     */
+    override fun onResume() {
+        super.onResume()
+        val isNotificationsEnabled = NotificationManagerCompat.from(this).areNotificationsEnabled()
+        if (isNotificationsEnabled) {
+            isNotificationPermissionEnabled.value = true
+        }
+    }
+
+    private fun onPermissionResult(isOk: Boolean) {
+        if (isOk) {
+            // Notification permission granted
+            errorScreenMessageListener.value = RadioApplicationMessages.getMessage("notification_permission_granted")
+        } else {
+            // Notification permission denied
+            errorScreenMessageListener.value = RadioApplicationMessages.getMessage("notification_permission_message")
+        }
     }
 
 }
