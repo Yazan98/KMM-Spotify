@@ -28,7 +28,6 @@ import com.yazantarifi.radio.core.shared.compose.components.ComposeScope
 import com.yazantarifi.radio.core.shared.compose.components.composables.getSecondTextColor
 import com.yazantarifi.radio.core.shared.compose.components.composables.getTextColor
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
-import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
@@ -36,38 +35,36 @@ import io.kamel.image.lazyPainterResource
 import kotlinx.coroutines.Job
 
 @Composable
-fun HomeCategoriesComposable(itemParent: HomeCategoriesItem, selectedStyle: Int) {
+fun HomeCategoriesComposable(itemParent: HomeCategoriesItem) {
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
         Text(itemParent.title, color = getTextColor(), fontSize = TextUnit(15f, TextUnitType.Sp))
         Spacer(Modifier.height(10.dp))
         itemParent.items?.let {
-            if (selectedStyle == HomeLayoutDesignItem.SCROLL_H) {
-                LazyRow(modifier = Modifier.fillMaxWidth()) {
-                    items(it) { item ->
-                        Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp)) {
-                            val resource = lazyPainterResource(item.icon ?: "") {
-                                coroutineContext = Job() + ComposeScope().getScope()
-                            }
-
-                            if (resource is Resource.Loading) {
-                                Box(
-                                    Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)).background(
-                                        getSecondTextColor()
-                                    )) {
-                                    Text(itemParent.loadingMessage, modifier = Modifier.align(Alignment.Center), color = Color.White)
-                                }
-                            } else {
-                                KamelImage(
-                                    resource = resource,
-                                    contentDescription = item.name ?: "",
-                                    modifier = Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)),
-                                    contentScale = ContentScale.Crop
-                                )
-                            }
-
-                            Spacer(Modifier.height(10.dp))
-                            Text(item.name ?: "", modifier = Modifier.width(130.dp), color = getTextColor(), maxLines = 1)
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(it) { item ->
+                    Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp)) {
+                        val resource = lazyPainterResource(item.icon ?: "") {
+                            coroutineContext = Job() + ComposeScope().getScope()
                         }
+
+                        if (resource is Resource.Loading) {
+                            Box(
+                                Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)).background(
+                                    getSecondTextColor()
+                                )) {
+                                Text(itemParent.loadingMessage, modifier = Modifier.align(Alignment.Center), color = Color.White)
+                            }
+                        } else {
+                            KamelImage(
+                                resource = resource,
+                                contentDescription = item.name ?: "",
+                                modifier = Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)),
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+
+                        Spacer(Modifier.height(10.dp))
+                        Text(item.name ?: "", modifier = Modifier.width(130.dp), color = getTextColor(), maxLines = 1)
                     }
                 }
             }

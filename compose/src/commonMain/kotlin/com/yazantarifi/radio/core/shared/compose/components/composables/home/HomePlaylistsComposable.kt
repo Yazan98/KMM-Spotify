@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import com.yazantarifi.radio.core.shared.compose.components.ComposeScope
 import com.yazantarifi.radio.core.shared.compose.components.composables.getSecondTextColor
 import com.yazantarifi.radio.core.shared.compose.components.composables.getTextColor
-import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import io.kamel.core.Resource
 import io.kamel.image.KamelImage
@@ -35,38 +34,36 @@ import io.kamel.image.lazyPainterResource
 import kotlinx.coroutines.Job
 
 @Composable
-fun HomePlaylistsComposable(itemParent: HomePlaylistsItem, selectedStyle: Int) {
+fun HomePlaylistsComposable(itemParent: HomePlaylistsItem) {
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
         Text(itemParent.title, color = getTextColor(), fontSize = TextUnit(15f, TextUnitType.Sp))
         Spacer(Modifier.height(10.dp))
         itemParent.playlists?.let {
-            if (selectedStyle == HomeLayoutDesignItem.SCROLL_H) {
-                LazyRow(modifier = Modifier.fillMaxWidth()) {
-                    items(it) { item ->
-                        Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp)) {
-                            val resource = lazyPainterResource(item.image ?: "") {
-                                coroutineContext = Job() + ComposeScope().getScope()
-                            }
-
-                            if (resource is Resource.Loading) {
-                                Box(Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)).background(getSecondTextColor())) {
-                                    Text(itemParent.loadingMessage, modifier = Modifier.align(Alignment.Center), color = Color.White)
-                                }
-                            } else {
-                                KamelImage(
-                                    resource = resource,
-                                    contentDescription = item.name ?: "",
-                                    modifier = Modifier.size(160.dp).clip(RoundedCornerShape(8.dp))
-                                )
-                            }
-
-                            Spacer(Modifier.height(10.dp))
-                            Row(modifier = Modifier.width(160.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text(item.name ?: "", modifier = Modifier.width(130.dp), color = getTextColor(), maxLines = 1)
-                                Text(item.numberOfTracks.toString(), color = getTextColor(), maxLines = 1)
-                            }
-                            Text(item.ownerName ?: "", color = getSecondTextColor(), modifier = Modifier.fillMaxWidth(), maxLines = 1)
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(it) { item ->
+                    Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp)) {
+                        val resource = lazyPainterResource(item.image ?: "") {
+                            coroutineContext = Job() + ComposeScope().getScope()
                         }
+
+                        if (resource is Resource.Loading) {
+                            Box(Modifier.size(160.dp).clip(RoundedCornerShape(8.dp)).background(getSecondTextColor())) {
+                                Text(itemParent.loadingMessage, modifier = Modifier.align(Alignment.Center), color = Color.White)
+                            }
+                        } else {
+                            KamelImage(
+                                resource = resource,
+                                contentDescription = item.name ?: "",
+                                modifier = Modifier.size(160.dp).clip(RoundedCornerShape(8.dp))
+                            )
+                        }
+
+                        Spacer(Modifier.height(10.dp))
+                        Row(modifier = Modifier.width(160.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                            Text(item.name ?: "", modifier = Modifier.width(130.dp), color = getTextColor(), maxLines = 1)
+                            Text(item.numberOfTracks.toString(), color = getTextColor(), maxLines = 1)
+                        }
+                        Text(item.ownerName ?: "", color = getSecondTextColor(), modifier = Modifier.fillMaxWidth(), maxLines = 1)
                     }
                 }
             }

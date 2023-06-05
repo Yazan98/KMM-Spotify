@@ -1,12 +1,8 @@
 package com.yazantarifi.radio.android.home.composables
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,7 +11,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.composables.RadioApplicationLoadingComposable
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
@@ -50,20 +45,25 @@ fun FeedComposable(viewModel: HomeViewModel) {
     if (viewModel.feedLoadingListener.value) {
         RadioApplicationLoadingComposable(RadioApplicationMessages.getMessage("loading_feed"))
     } else {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(viewModel.feedContentListener.value) { item ->
-                item?.let {
-                   when (it.getItemViewType()) {
-                       RadioHomeItem.TYPE_PLAYLIST -> HomePlaylistsComposable(itemParent = item as HomePlaylistsItem, selectedListLayoutDesign)
-                       RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(item as HomeOpenSpotifyAppItem)
-                       RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem)
-                       RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem, selectedListLayoutDesign)
-                       RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
-                       RadioHomeItem.TYPE_ALBUMS -> HomeAlbumsComposable(itemParent = item as HomeAlbumsItem, selectedListLayoutDesign)
-                       RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(selectedListLayoutDesign, item as HomeLayoutDesignItem) {
-                           selectedListLayoutDesign = it
-                       }
-                   }
+        HomeLinearContentComposable(viewModel, selectedListLayoutDesign) {
+            selectedListLayoutDesign = it
+        }
+    }
+}
+
+@Composable
+fun HomeLinearContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign: Int, onChangeClickListener: (Int) -> Unit) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(viewModel.feedContentListener.value) { item ->
+            item?.let {
+                when (it.getItemViewType()) {
+                    RadioHomeItem.TYPE_PLAYLIST -> HomePlaylistsComposable(itemParent = item as HomePlaylistsItem)
+                    RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(item as HomeOpenSpotifyAppItem)
+                    RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem)
+                    RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem)
+                    RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
+                    RadioHomeItem.TYPE_ALBUMS -> HomeAlbumsComposable(itemParent = item as HomeAlbumsItem)
+                    RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(selectedListLayoutDesign, item as HomeLayoutDesignItem, onChangeClickListener)
                 }
             }
         }
