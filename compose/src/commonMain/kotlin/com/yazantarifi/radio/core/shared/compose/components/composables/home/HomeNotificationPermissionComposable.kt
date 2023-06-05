@@ -32,7 +32,7 @@ import com.yazantarifi.radio.core.shared.compose.components.composables.getSecon
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeNotificationPermissionItem
 
 @Composable
-fun HomeNotificationPermissionComposable(item: HomeNotificationPermissionItem) {
+fun HomeNotificationPermissionComposable(item: HomeNotificationPermissionItem, onItemClickListener: (Boolean) -> Unit) {
     if (!item.isNotificationsPermissionEnabled) {
         Box(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
             Box(modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(8.dp)).background(getSecondTextColor())) {
@@ -48,7 +48,9 @@ fun HomeNotificationPermissionComposable(item: HomeNotificationPermissionItem) {
                     Spacer(Modifier.height(10.dp))
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                         Button(
-                            onClick = {},
+                            onClick = {
+                                onItemClickListener(true)
+                            },
                             shape = RoundedCornerShape(23.dp),
                             border = BorderStroke(3.dp, Color.White),
                             colors = ButtonDefaults.buttonColors(contentColor = Color.White, backgroundColor = Color.White),
@@ -64,7 +66,9 @@ fun HomeNotificationPermissionComposable(item: HomeNotificationPermissionItem) {
 
                         Spacer(Modifier.width(20.dp))
                         Button(
-                            onClick = {},
+                            onClick = {
+                                onItemClickListener(false)
+                            },
                             shape = RoundedCornerShape(23.dp),
                             border = BorderStroke(3.dp, Color.White),
                             colors = ButtonDefaults.buttonColors(contentColor = Color.White, backgroundColor = Color.White),

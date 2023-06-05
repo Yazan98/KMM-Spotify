@@ -79,7 +79,7 @@ fun FeedComposable(viewModel: HomeViewModel) {
 fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign: Int, onChangeClickListener: (Int) -> Unit) {
     val context = LocalContext.current
     val filteredList by remember {
-        mutableStateOf(HomeScreenVerticalGridMapper().getVerticalItems(viewModel.feedContentListener.value))
+        mutableStateOf(HomeScreenVerticalGridMapper().getVerticalItems(viewModel.feedContentListener.toList()))
     }
 
     LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = Modifier.fillMaxSize()) {
@@ -91,7 +91,9 @@ fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign
                     RadioHomeItem.TYPE_SECTION_HEADER -> HomeSectionHeaderComposable(item = itemContent as HomeSectionHeaderItem)
                     RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = itemContent as HomeHeaderItem)
                     RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(selectedListLayoutDesign, itemContent as HomeLayoutDesignItem, onChangeClickListener)
-                    RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(itemContent as HomeNotificationPermissionItem)
+                    RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(itemContent as HomeNotificationPermissionItem) {
+                        onNotificationPermissionClickListener(it, viewModel, context)
+                    }
                     RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(itemContent as HomeOpenSpotifyAppItem) {
                         openSpotifyApplication(context, viewModel)
                     }
@@ -108,14 +110,16 @@ fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign
 fun HomeLinearContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign: Int, onChangeClickListener: (Int) -> Unit) {
     val context = LocalContext.current
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(viewModel.feedContentListener.value) { item ->
+        items(viewModel.feedContentListener) { item ->
             item?.let {
                 when (it.getItemViewType()) {
                     RadioHomeItem.TYPE_LIST_H_PLAYLIST -> HomePlaylistsComposable(itemParent = item as HomePlaylistsItem)
                     RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(item as HomeOpenSpotifyAppItem) {
                         openSpotifyApplication(context, viewModel)
                     }
-                    RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem)
+                    RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem) {
+                        onNotificationPermissionClickListener(it, viewModel, context)
+                    }
                     RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem)
                     RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
                     RadioHomeItem.TYPE_ALBUMS -> HomeAlbumsComposable(itemParent = item as HomeAlbumsItem)
@@ -135,5 +139,12 @@ private fun openSpotifyApplication(context: Context, viewModel: HomeViewModel) {
     } else {
         // Spotify app is not installed on the device
         viewModel.errorMessageListener.update { RadioApplicationMessages.getMessage("spotify_not_installed") }
+    }
+}
+
+private fun onNotificationPermissionClickListener(isEnableButton: Boolean, viewModel: HomeViewModel, context: Context) {
+    when (isEnableButton) {
+        false -> viewModel.execute(HomeAction.RemoveNotificationPermissionAction)
+        true -> {}
     }
 }

@@ -7,7 +7,7 @@ import com.yazantarifi.radio.core.shared.compose.components.models.HomeSectionHe
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 
 class HomeScreenVerticalGridMapper {
-    fun getVerticalItems(items: ArrayList<RadioHomeItem?>): List<RadioHomeItem> {
+    fun getVerticalItems(items: List<RadioHomeItem?>): List<RadioHomeItem> {
         val filteredItems = ArrayList<RadioHomeItem>()
         items.forEach {
             it?.let {

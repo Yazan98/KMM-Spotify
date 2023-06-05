@@ -2,6 +2,7 @@ package com.yazantarifi.radio.android.home.viewModels
 
 import android.content.Context
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.app.NotificationManagerCompat
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider
@@ -11,6 +12,7 @@ import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseType
 import com.yazantarifi.kmm.sopy.base.viewModels.SopifyViewModel
 import com.yazantarifi.radio.core.shared.compose.components.models.account.RadioAccountItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeNotificationPermissionItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
 import com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase
@@ -31,7 +33,7 @@ class HomeViewModel @Inject constructor(
 
     var selectedLayoutDesignMode: Int = HomeLayoutDesignItem.SCROLL_H
     val feedLoadingListener by lazy { mutableStateOf(false) }
-    val feedContentListener: MutableState<ArrayList<RadioHomeItem?>> by lazy { mutableStateOf(arrayListOf()) }
+    var feedContentListener = mutableStateListOf<RadioHomeItem>()
 
     val categoriesListListener: MutableState<ArrayList<RadioCategoryItem?>> by lazy { mutableStateOf(arrayListOf()) }
     val categoriesLoadingListener by lazy { mutableStateOf(false) }
@@ -44,7 +46,23 @@ class HomeViewModel @Inject constructor(
             is HomeAction.GetFeed -> onGetHomeScreenFeedInfo(action.context)
             is HomeAction.GetCategoriesAction -> onGetCategories()
             is HomeAction.GetAccountInfoAction -> onGetAccountInfo()
+            is HomeAction.RemoveNotificationPermissionAction -> onRemoveNotificationPermissionItem()
         }
+    }
+
+    private fun onRemoveNotificationPermissionItem() {
+        var itemPosition = -1
+        feedContentListener.let {
+            for ((index, value) in it.withIndex()) {
+                if (value is HomeNotificationPermissionItem) {
+                    itemPosition = index
+                    break
+                }
+            }
+        }
+
+        if (itemPosition == -1) return
+        feedContentListener.removeAt(itemPosition)
     }
 
     private fun onGetCategories() {
@@ -90,7 +108,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onGetHomeScreenFeedInfo(context: Context) {
-        if (feedContentListener.value.isNotEmpty()) return
+        if (feedContentListener.isNotEmpty()) return
         getHomeScreenItems.execute(
             GetHomeScreenItemsUseCase.RequestValue(storageProvider.getAccessToken(), android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R, NotificationManagerCompat.from(context).areNotificationsEnabled()),
             object : SopifyUseCaseListener {
@@ -101,7 +119,7 @@ class HomeViewModel @Inject constructor(
                             is SopifyState.SopifyLoadingState -> feedLoadingListener.value = newState.isLoading
                             is SopifyState.SopifyErrorState -> errorMessageListener.value = newState.exception.message ?: ""
                             is SopifyState.SopifySuccessState -> (newState.payload as? List<RadioHomeItem>)?.let {
-                                feedContentListener.value.addAll(it)
+                                feedContentListener.addAll(it)
                             }
                         }
                     }
