@@ -1,6 +1,7 @@
 package com.yazantarifi.radio.core.shared.compose.components.composables.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,14 +36,14 @@ import io.kamel.image.lazyPainterResource
 import kotlinx.coroutines.Job
 
 @Composable
-fun HomeCategoriesComposable(itemParent: HomeCategoriesItem) {
+fun HomeCategoriesComposable(itemParent: HomeCategoriesItem, onCategoryClickListener: (String) -> Unit) {
     Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
         Text(itemParent.title, color = getTextColor(), fontSize = TextUnit(15f, TextUnitType.Sp))
         Spacer(Modifier.height(10.dp))
         itemParent.items?.let {
             LazyRow(modifier = Modifier.fillMaxWidth()) {
                 items(it) { item ->
-                    Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp)) {
+                    Column(modifier = Modifier.padding(end = 10.dp, bottom = 10.dp).clickable { onCategoryClickListener(item.id) }) {
                         val resource = lazyPainterResource(item.icon ?: "") {
                             coroutineContext = Job() + ComposeScope().getScope()
                         }

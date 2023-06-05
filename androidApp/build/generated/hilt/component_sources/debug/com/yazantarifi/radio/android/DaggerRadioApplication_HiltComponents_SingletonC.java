@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.yazantarifi.android.radio.playlists.PlaylistsModule;
+import com.yazantarifi.android.radio.playlists.PlaylistsModule_GetGetCategoryPlaylistsUseCaseFactory;
+import com.yazantarifi.android.radio.playlists.RadioPlaylistsScreen;
+import com.yazantarifi.android.radio.playlists.viewModel.PlaylistsViewModel;
+import com.yazantarifi.android.radio.playlists.viewModel.PlaylistsViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen_MembersInjector;
@@ -38,7 +43,9 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
+import dagger.internal.SetBuilder;
 import io.ktor.client.HttpClient;
 import java.util.Collections;
 import java.util.Map;
@@ -99,6 +106,15 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
     @Deprecated
     public Builder homeModule(HomeModule homeModule) {
       Preconditions.checkNotNull(homeModule);
+      return this;
+    }
+
+    /**
+     * @deprecated This module is declared, but an instance is not used in the component. This method is a no-op. For more, see https://dagger.dev/unused-modules.
+     */
+    @Deprecated
+    public Builder playlistsModule(PlaylistsModule playlistsModule) {
+      Preconditions.checkNotNull(playlistsModule);
       return this;
     }
 
@@ -383,6 +399,10 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
     }
 
     @Override
+    public void injectRadioPlaylistsScreen(RadioPlaylistsScreen arg0) {
+    }
+
+    @Override
     public void injectRadioIntroScreen(RadioIntroScreen arg0) {
       injectRadioIntroScreen2(arg0);
     }
@@ -403,7 +423,7 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
     @Override
     public Set<String> getViewModelKeys() {
-      return Collections.<String>singleton(HomeViewModel_HiltModules_KeyModule_ProvideFactory.provide());
+      return SetBuilder.<String>newSetBuilder(2).add(HomeViewModel_HiltModules_KeyModule_ProvideFactory.provide()).add(PlaylistsViewModel_HiltModules_KeyModule_ProvideFactory.provide()).build();
     }
 
     @Override
@@ -444,6 +464,8 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
     private Provider<HomeViewModel> homeViewModelProvider;
 
+    private Provider<PlaylistsViewModel> playlistsViewModelProvider;
+
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
         ViewModelLifecycle viewModelLifecycleParam) {
@@ -458,11 +480,12 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
     private void initialize(final SavedStateHandle savedStateHandleParam,
         final ViewModelLifecycle viewModelLifecycleParam) {
       this.homeViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
+      this.playlistsViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
     }
 
     @Override
     public Map<String, Provider<ViewModel>> getHiltViewModelMap() {
-      return Collections.<String, Provider<ViewModel>>singletonMap("com.yazantarifi.radio.android.home.viewModels.HomeViewModel", ((Provider) homeViewModelProvider));
+      return MapBuilder.<String, Provider<ViewModel>>newMapBuilder(2).put("com.yazantarifi.radio.android.home.viewModels.HomeViewModel", ((Provider) homeViewModelProvider)).put("com.yazantarifi.android.radio.playlists.viewModel.PlaylistsViewModel", ((Provider) playlistsViewModelProvider)).build();
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -488,6 +511,9 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
         switch (id) {
           case 0: // com.yazantarifi.radio.android.home.viewModels.HomeViewModel 
           return (T) new HomeViewModel(singletonCImpl.getGetHomeScreenItemsUseCaseProvider.get(), singletonCImpl.getGetCategoriesUseCaseProvider.get(), singletonCImpl.getGetAccountTreeInfoUseCaseProvider.get(), singletonCImpl.getStorageProviderImplementationInstanceProvider.get());
+
+          case 1: // com.yazantarifi.android.radio.playlists.viewModel.PlaylistsViewModel 
+          return (T) new PlaylistsViewModel(singletonCImpl.getStorageProviderImplementationInstanceProvider.get(), PlaylistsModule_GetGetCategoryPlaylistsUseCaseFactory.getGetCategoryPlaylistsUseCase());
 
           default: throw new AssertionError(id);
         }

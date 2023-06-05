@@ -5,9 +5,12 @@ import android.content.Intent
 import android.content.ComponentName
 
 enum class SopifyScreenNavigation constructor(private val screenPath: String) {
-    HOME_SCREEN("com.yazantarifi.radio.android.home.RadioHomeScreen");
+    HOME_SCREEN("com.yazantarifi.radio.android.home.RadioHomeScreen"),
+    PLAYLISTS_SCREEN("com.yazantarifi.android.radio.playlists.RadioPlaylistsScreen");
 
     companion object {
+
+        const val PLAY_LIST_ARGS = "args.playlist.id"
 
         fun getIntent(context: Context, screenNavigation: SopifyScreenNavigation): Intent {
             return Intent().apply {
@@ -19,6 +22,12 @@ enum class SopifyScreenNavigation constructor(private val screenPath: String) {
             Intent().apply {
                 component = ComponentName(context.packageName, screenNavigation.screenPath)
                 context.startActivity(this)
+            }
+        }
+
+        fun startScreenByArgs(context: Context, screenNavigation: SopifyScreenNavigation): Intent {
+            return Intent().apply {
+                component = ComponentName(context.packageName, screenNavigation.screenPath)
             }
         }
     }

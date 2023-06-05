@@ -59,6 +59,7 @@ kotlin {
                 implementation(project(mapOf("path" to ":compose")))
                 implementation(project(mapOf("path" to ":sopify")))
 
+                implementation("com.google.dagger:hilt-android:2.44")
                 implementation("io.ktor:ktor-client-android:2.2.1")
                 implementation("io.ktor:ktor-client-json:2.2.1")
                 implementation("io.ktor:ktor-client-serialization-jvm:2.2.1")

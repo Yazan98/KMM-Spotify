@@ -14,6 +14,8 @@ pluginManagement {
         id("com.android.application").version("8.0.2")
         id("com.android.library").version("8.0.2")
         id("org.jetbrains.compose").version("1.4.0")
+        id("com.android.library") version "8.0.2"
+        id("org.jetbrains.kotlin.android") version "1.8.20"
     }
 }
 
@@ -33,3 +35,4 @@ include(":androidFeatures:core")
 include(":androidFeatures:auth")
 include(":androidFeatures:home")
 include(":compose")
+include(":androidFeatures:playlists")

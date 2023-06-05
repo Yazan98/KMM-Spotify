@@ -1,5 +1,8 @@
 package com.yazantarifi.radio.android;
 
+import com.yazantarifi.android.radio.playlists.PlaylistsModule;
+import com.yazantarifi.android.radio.playlists.RadioPlaylistsScreen_GeneratedInjector;
+import com.yazantarifi.android.radio.playlists.viewModel.PlaylistsViewModel_HiltModules;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen_GeneratedInjector;
 import com.yazantarifi.radio.android.home.HomeModule;
 import com.yazantarifi.radio.android.home.RadioHomeScreen_GeneratedInjector;
@@ -131,6 +134,7 @@ public final class RadioApplication_HiltComponents {
           ApplicationModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           HomeModule.class,
+          PlaylistsModule.class,
           ActivityRetainedCBuilderModule.class,
           ServiceCBuilderModule.class
       }
@@ -157,6 +161,7 @@ public final class RadioApplication_HiltComponents {
       modules = {
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HomeViewModel_HiltModules.KeyModule.class,
+          PlaylistsViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class
       }
@@ -180,7 +185,8 @@ public final class RadioApplication_HiltComponents {
       }
   )
   @ActivityScoped
-  public abstract static class ActivityC implements RadioIntroScreen_GeneratedInjector,
+  public abstract static class ActivityC implements RadioPlaylistsScreen_GeneratedInjector,
+      RadioIntroScreen_GeneratedInjector,
       RadioAuthScreen_GeneratedInjector,
       RadioHomeScreen_GeneratedInjector,
       ActivityComponent,
@@ -197,7 +203,8 @@ public final class RadioApplication_HiltComponents {
   @Subcomponent(
       modules = {
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
-          HomeViewModel_HiltModules.BindsModule.class
+          HomeViewModel_HiltModules.BindsModule.class,
+          PlaylistsViewModel_HiltModules.BindsModule.class
       }
   )
   @ViewModelScoped

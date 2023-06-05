@@ -66,6 +66,10 @@
             android:label=""
             android:screenOrientation="fullSensor" />
         <activity
+            android:name="com.yazantarifi.android.radio.playlists.RadioPlaylistsScreen"
+            android:label=""
+            android:screenOrientation="fullSensor" />
+        <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="true" />
 

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.composables.RadioApplicationLoadingComposable
+import com.yazantarifi.radio.android.core.ui.SopifyScreenNavigation
 import com.yazantarifi.radio.android.home.RadioHomeScreen
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
@@ -104,7 +105,11 @@ fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign
                     RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(itemContent as HomeOpenSpotifyAppItem) {
                         openSpotifyApplication(context, viewModel)
                     }
-                    RadioHomeItem.TYPE_CATEGORY -> HomeCategoryComposable(itemContent as RadioCategoryItem)
+                    RadioHomeItem.TYPE_CATEGORY -> HomeCategoryComposable(itemContent as RadioCategoryItem) {
+                        context.startActivity(SopifyScreenNavigation.startScreenByArgs(context, SopifyScreenNavigation.PLAYLISTS_SCREEN).apply {
+                            putExtra(SopifyScreenNavigation.PLAY_LIST_ARGS, it)
+                        })
+                    }
                     RadioHomeItem.TYPE_PLAYLIST -> HomePlaylistComposable(itemContent as RadioPlaylist)
                     RadioHomeItem.TYPE_ALBUM -> HomeAlbumComposable(itemContent as RadioAlbum)
                 }
@@ -127,7 +132,11 @@ fun HomeLinearContentComposable(viewModel: HomeViewModel, selectedListLayoutDesi
                     RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem) {
                         onNotificationPermissionClickListener(it, viewModel, context)
                     }
-                    RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem)
+                    RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem) {
+                        context.startActivity(SopifyScreenNavigation.startScreenByArgs(context, SopifyScreenNavigation.PLAYLISTS_SCREEN).apply {
+                            putExtra(SopifyScreenNavigation.PLAY_LIST_ARGS, it)
+                        })
+                    }
                     RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
                     RadioHomeItem.TYPE_ALBUMS -> HomeAlbumsComposable(itemParent = item as HomeAlbumsItem)
                     RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(selectedListLayoutDesign, item as HomeLayoutDesignItem, onChangeClickListener)

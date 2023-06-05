@@ -33,6 +33,7 @@ object RadioApplicationMessages {
         put("account_section_played_tracks:en", "Last Played Tracks")
         put("notification_permission_granted:en", "Application Notifications Enabled")
         put("spotify_not_installed:en", "Spotify Application Not Installed ...")
+        put("loading_playlists:en", "Loading Playlists ...")
         put("spotify_app_open_message:en", "Open Spotify Application to Get Access on A lot of Music More than This Content")
         put("notification_permission_message:en", "Radio Application Need To Show Notifications, Click on Allow to Take Notification Permission :D")
         put("notification_permission_warning_message:en", "Warning: You Cant get Notifications Unless Notifications Enabled")

@@ -1,6 +1,7 @@
 package com.yazantarifi.radio.core.shared.compose.components.composables.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,8 +31,8 @@ import io.kamel.image.lazyPainterResource
 import kotlinx.coroutines.Job
 
 @Composable
-fun HomeCategoryComposable(item: RadioCategoryItem) {
-    Column(modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 10.dp)) {
+fun HomeCategoryComposable(item: RadioCategoryItem, onCategoryClickListener: (String) -> Unit) {
+    Column(modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 10.dp).clickable { onCategoryClickListener(item.id) }) {
         val resource = lazyPainterResource(item.icon ?: "") {
             coroutineContext = Job() + ComposeScope().getScope()
         }
