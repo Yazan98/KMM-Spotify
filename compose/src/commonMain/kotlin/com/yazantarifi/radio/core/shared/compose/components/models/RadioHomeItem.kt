@@ -12,6 +12,7 @@ interface RadioHomeItem {
         const val TYPE_RATE_APP = 6
         const val TYPE_LIST_CATEGORIES = 7
         const val TYPE_PLAYLIST = 8
+        const val TYPE_ALBUMS = 9
     }
 }
 

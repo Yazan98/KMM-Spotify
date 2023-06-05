@@ -1,13 +1,16 @@
 package com.yazantarifi.radio.core.shared.compose.components.composables.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -56,7 +59,10 @@ fun HomePlaylistsComposable(itemParent: HomePlaylistsItem) {
                         }
 
                         Spacer(Modifier.height(10.dp))
-                        Text(item.name ?: "", color = getTextColor(), modifier = Modifier.fillMaxWidth(), maxLines = 1)
+                        Row(modifier = Modifier.width(160.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                            Text(item.name ?: "", modifier = Modifier.width(130.dp), color = getTextColor(), maxLines = 1)
+                            Text(item.numberOfTracks.toString(), color = getTextColor(), maxLines = 1)
+                        }
                         Text(item.ownerName ?: "", color = getSecondTextColor(), modifier = Modifier.fillMaxWidth(), maxLines = 1)
                     }
                 }

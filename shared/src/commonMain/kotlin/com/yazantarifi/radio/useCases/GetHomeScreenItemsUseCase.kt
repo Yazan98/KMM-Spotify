@@ -5,11 +5,16 @@ import com.yazantarifi.kmm.sopy.base.useCases.useCasesTypes.SopifyUseCase
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.api.SpotifyApiHeadersBuilder
 import com.yazantarifi.radio.api.home.SpotifyFeaturedPlaylistsApiRequest
+import com.yazantarifi.radio.api.home.SpotifyNewAlbumsReleasesApiRequest
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
+import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
+import com.yazantarifi.radio.models.SpotifyAlbum
+import com.yazantarifi.radio.models.SpotifyAlbumsResponse
 import com.yazantarifi.radio.models.SpotifyFeaturedPlaylistsResponse
 import io.ktor.client.HttpClient
 
@@ -19,6 +24,10 @@ class GetHomeScreenItemsUseCase constructor(
 
     private val featuredListApiClient: SpotifyFeaturedPlaylistsApiRequest by lazy {
         SpotifyFeaturedPlaylistsApiRequest()
+    }
+
+    private val newReleasesApiClient: SpotifyNewAlbumsReleasesApiRequest by lazy {
+        SpotifyNewAlbumsReleasesApiRequest()
     }
 
     data class RequestValue(
@@ -70,9 +79,6 @@ class GetHomeScreenItemsUseCase constructor(
                         RadioApplicationMessages.getMessage("loading_image"),
                         playlists
                     ))
-
-                    onSubmitLoadingState(false)
-                    onSubmitSuccessState(screenItems)
                 }
 
                 override fun onError(error: Throwable) {
@@ -81,11 +87,53 @@ class GetHomeScreenItemsUseCase constructor(
             })
         }
 
-        featuredListApiClient.executeRequest(Unit, SpotifyApiHeadersBuilder.getApplicationBearerTokenHeaders(requestValue.token))
+        if (newReleasesApiClient.isRequestListenerAttachNeeded()) {
+            newReleasesApiClient.addHttpClient(httpClient)
+            newReleasesApiClient.addRequestListener(object : SopifyRequestListener<SpotifyAlbumsResponse> {
+                override fun onSuccess(responseValue: SpotifyAlbumsResponse) {
+                    val albums = ArrayList<RadioAlbum>()
+                    responseValue.albums?.items?.let {
+                        albums.addAll(it.map { album ->
+                            var imageUrl: String = ""
+                            album.images?.get(0)?.let {
+                                imageUrl = it.url ?: ""
+                            }
+
+                            RadioAlbum(
+                                id = album.id ?: "",
+                                name = album.name ?: "",
+                                image = imageUrl ?: "",
+                                releaseDate = album.releaseDate ?: "",
+                                numberOfTracks = album.numberOfTracks ?: 0,
+                                artists = album.artists?.map { it.name ?: "" } ?: arrayListOf()
+                            )
+                        })
+                    }
+
+                    screenItems.add(HomeAlbumsItem(
+                        RadioApplicationMessages.getMessage("albums"),
+                        RadioApplicationMessages.getMessage("loading_image"),
+                        albums
+                    ))
+                }
+
+                override fun onError(error: Throwable) {
+                    // Will Not Show the Item
+                }
+            })
+        }
+
+        val headers = SpotifyApiHeadersBuilder.getApplicationBearerTokenHeaders(requestValue.token)
+        featuredListApiClient.executeRequest(Unit, headers)
+        newReleasesApiClient.executeRequest(Unit, headers)
+
+        onSubmitLoadingState(false)
+        onSubmitSuccessState(screenItems)
     }
 
     override fun clear() {
         super.clear()
         featuredListApiClient.clear()
+        newReleasesApiClient.clear()
     }
 }

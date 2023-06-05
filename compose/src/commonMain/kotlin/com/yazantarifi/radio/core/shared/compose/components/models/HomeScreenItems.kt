@@ -1,5 +1,6 @@
 package com.yazantarifi.radio.core.shared.compose.components.models
 
+import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioMusicItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
@@ -71,5 +72,15 @@ data class HomePlaylistsItem(
 ): RadioHomeItem {
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_PLAYLIST
+    }
+}
+
+data class HomeAlbumsItem(
+    val title: String,
+    val loadingMessage: String,
+    val list: List<RadioAlbum>
+): RadioHomeItem {
+    override fun getItemViewType(): Int {
+        return RadioHomeItem.TYPE_ALBUMS
     }
 }
