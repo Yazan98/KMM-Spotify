@@ -8,7 +8,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,14 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.screens.SopifyStateScreen
 import com.yazantarifi.radio.android.home.composables.AccountComposable
-import com.yazantarifi.radio.android.home.composables.DiscoverComposable
+import com.yazantarifi.radio.android.home.composables.CategoriesComposable
 import com.yazantarifi.radio.android.home.composables.FeedComposable
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
@@ -54,7 +53,7 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
             modifier = Modifier.background(getBackgroundColor())
         ) {
             composable("home") { FeedComposable(viewModel) }
-            composable("discover") { DiscoverComposable(viewModel) }
+            composable("discover") { CategoriesComposable(viewModel) }
             composable("account") { AccountComposable(viewModel) }
         }
         return viewModel
@@ -78,11 +77,11 @@ class RadioHomeScreen: SopifyStateScreen<HomeAction, HomeViewModel>() {
                         },
                         label = {
                             if (index == 0) {
-                                Text(text = "Home")
+                                Text(text = RadioApplicationMessages.getMessage("home_tab_1"))
                             } else if (index == 1) {
-                                Text(text = "Discover")
+                                Text(text = RadioApplicationMessages.getMessage("home_tab_2"))
                             } else {
-                                Text(text = "Account")
+                                Text(text = RadioApplicationMessages.getMessage("home_tab_3"))
                             }
                         },
                         selected = selectedItem == index,

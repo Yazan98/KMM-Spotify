@@ -52,7 +52,7 @@ fun FeedComposable(viewModel: HomeViewModel) {
     }
 
     var selectedListLayoutDesign by remember {
-        mutableStateOf(HomeLayoutDesignItem.SCROLL_H)
+        mutableStateOf(viewModel.selectedLayoutDesignMode)
     }
 
     if (viewModel.feedLoadingListener.value) {
@@ -61,10 +61,12 @@ fun FeedComposable(viewModel: HomeViewModel) {
         when (selectedListLayoutDesign == HomeLayoutDesignItem.SCROLL_H) {
             true -> HomeLinearContentComposable(viewModel, selectedListLayoutDesign) {
                 selectedListLayoutDesign = it
+                viewModel.selectedLayoutDesignMode = it
             }
             
             false -> HomeGridContentComposable(viewModel, selectedListLayoutDesign) {
                 selectedListLayoutDesign = it
+                viewModel.selectedLayoutDesignMode = it
             }
         }
     }

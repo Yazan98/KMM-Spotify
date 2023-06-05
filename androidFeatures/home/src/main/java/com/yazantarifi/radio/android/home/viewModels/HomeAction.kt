@@ -5,6 +5,6 @@ import android.content.Context
 
 interface HomeAction {
     data class GetFeed(val context: Context): HomeAction
-    data class GetDiscoverContent(val isHardReload: Boolean): HomeAction
+    object GetCategoriesAction: HomeAction
     object GetAccountInfo: HomeAction
 }
