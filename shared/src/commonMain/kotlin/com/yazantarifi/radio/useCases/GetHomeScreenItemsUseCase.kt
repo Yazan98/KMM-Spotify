@@ -5,16 +5,20 @@ import com.yazantarifi.kmm.sopy.base.useCases.useCasesTypes.SopifyUseCase
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.api.SpotifyApiHeadersBuilder
 import com.yazantarifi.radio.api.home.SpotifyFeaturedPlaylistsApiRequest
+import com.yazantarifi.radio.api.home.SpotifyGetCategoriesApiRequest
 import com.yazantarifi.radio.api.home.SpotifyNewAlbumsReleasesApiRequest
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsItem
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
+import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
 import com.yazantarifi.radio.models.SpotifyAlbum
 import com.yazantarifi.radio.models.SpotifyAlbumsResponse
+import com.yazantarifi.radio.models.SpotifyCategoriesResponse
 import com.yazantarifi.radio.models.SpotifyFeaturedPlaylistsResponse
 import io.ktor.client.HttpClient
 
@@ -28,6 +32,10 @@ class GetHomeScreenItemsUseCase constructor(
 
     private val newReleasesApiClient: SpotifyNewAlbumsReleasesApiRequest by lazy {
         SpotifyNewAlbumsReleasesApiRequest()
+    }
+
+    private val categoriesApiClient: SpotifyGetCategoriesApiRequest by lazy {
+        SpotifyGetCategoriesApiRequest(false)
     }
 
     data class RequestValue(
@@ -123,9 +131,43 @@ class GetHomeScreenItemsUseCase constructor(
             })
         }
 
+        if (categoriesApiClient.isRequestListenerAttachNeeded()) {
+            categoriesApiClient.addHttpClient(httpClient)
+            categoriesApiClient.addRequestListener(object : SopifyRequestListener<SpotifyCategoriesResponse> {
+                override fun onSuccess(responseValue: SpotifyCategoriesResponse) {
+                    val categories = ArrayList<RadioCategoryItem>()
+                    responseValue.categories?.items?.let {
+                        categories.addAll(it.map {
+                            var imageUrl: String = ""
+                            it.icons?.get(0)?.let {
+                                imageUrl = it.url ?: ""
+                            }
+
+                            RadioCategoryItem(
+                                it.id ?: "",
+                                it.name ?: "",
+                                imageUrl
+                            )
+                        })
+                    }
+
+                    screenItems.add(HomeCategoriesItem(
+                        RadioApplicationMessages.getMessage("categories"),
+                        RadioApplicationMessages.getMessage("loading_image"),
+                        categories
+                    ))
+                }
+
+                override fun onError(error: Throwable) {
+                    // Will Not Show the Item
+                }
+            })
+        }
+
         val headers = SpotifyApiHeadersBuilder.getApplicationBearerTokenHeaders(requestValue.token)
         featuredListApiClient.executeRequest(Unit, headers)
         newReleasesApiClient.executeRequest(Unit, headers)
+        categoriesApiClient.executeRequest(Unit, headers)
 
         onSubmitLoadingState(false)
         onSubmitSuccessState(screenItems)
@@ -135,5 +177,6 @@ class GetHomeScreenItemsUseCase constructor(
         super.clear()
         featuredListApiClient.clear()
         newReleasesApiClient.clear()
+        categoriesApiClient.clear()
     }
 }

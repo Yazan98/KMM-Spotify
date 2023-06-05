@@ -12,7 +12,7 @@ import io.ktor.http.HttpStatusCode
 class SpotifyNewAlbumsReleasesApiRequest: SopifyOneRequest<Unit, SpotifyAlbumsResponse>() {
 
     override fun getRequestUrl(): String {
-        return "https://api.spotify.com/v1/browse/new-releases?country=JO&locale=en&offset=0&limit=40"
+        return "https://api.spotify.com/v1/browse/new-releases?locale=en&offset=0&limit=40"
     }
 
     override suspend fun executeRequest(requestBody: Unit, headers: List<Pair<String, String>>) {

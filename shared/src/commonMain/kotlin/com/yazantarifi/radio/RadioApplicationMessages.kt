@@ -10,6 +10,7 @@ object RadioApplicationMessages {
         put("featured_playlists:en", "Featured Playlists")
         put("loading_image:en", "Image Loading ...")
         put("albums:en", "Albums - New Releases")
+        put("categories:en", "Top Picked Categories")
         put("home_des:en", "This Application is a Simple Example about Kotlin Multiplatform Mobile apps with Compose Multiplatform Powered by Spotify Api ans Sopy Developed by @Yazan98 - Github Open Source")
     }
 

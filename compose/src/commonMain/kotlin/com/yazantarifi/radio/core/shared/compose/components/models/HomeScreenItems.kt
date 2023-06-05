@@ -40,6 +40,7 @@ data class HomeMusicItem(
 
 data class HomeCategoriesItem(
     val title: String,
+    val loadingMessage: String,
     val items: List<RadioCategoryItem>
 ): RadioHomeItem {
     override fun getItemViewType(): Int {

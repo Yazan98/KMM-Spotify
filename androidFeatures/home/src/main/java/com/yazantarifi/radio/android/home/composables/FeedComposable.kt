@@ -13,14 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.android.core.composables.RadioApplicationLoadingComposable
-import com.yazantarifi.radio.android.core.composables.screens.PostListingComposable
 import com.yazantarifi.radio.android.home.viewModels.HomeAction
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeAlbumsComposable
+import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeCategoriesComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeChangeLayoutComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeHeaderComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomePlaylistsComposable
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsItem
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
@@ -40,6 +41,7 @@ fun FeedComposable(viewModel: HomeViewModel) {
                 item?.let {
                    when (it.getItemViewType()) {
                        RadioHomeItem.TYPE_PLAYLIST -> HomePlaylistsComposable(itemParent = item as HomePlaylistsItem)
+                       RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem)
                        RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
                        RadioHomeItem.TYPE_ALBUMS -> HomeAlbumsComposable(itemParent = item as HomeAlbumsItem)
                        RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(item = item as HomeLayoutDesignItem) {
