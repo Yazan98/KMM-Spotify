@@ -8,5 +8,6 @@ interface RadioAccountItem {
         const val TYPE_SECTION = 2
         const val TYPE_LIST_ITEM = 3
         const val TYPE_ARTIST = 4
+        const val TYPE_TRACK = 5
     }
 }

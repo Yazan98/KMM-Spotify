@@ -28,6 +28,18 @@ data class AccountSectionNameItem(
     }
 }
 
+data class AccountTrackItem(
+    val image: String,
+    val name: String,
+    val description: String,
+    val id: String,
+    val previewUrl: String
+): RadioAccountItem {
+    override fun getViewType(): Int {
+        return RadioAccountItem.TYPE_TRACK
+    }
+}
+
 data class AccountArtistItem(
     val name: String,
     val description: String,

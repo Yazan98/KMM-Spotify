@@ -39,7 +39,7 @@ fun AccountArtistComposable(item: AccountArtistItem) {
 
         if (resource is Resource.Loading) {
             Box(
-                Modifier.size(90.dp).clip(RoundedCornerShape(8.dp)).background(
+                Modifier.size(70.dp).clip(RoundedCornerShape(8.dp)).background(
                     getSecondTextColor()
                 )) {
                 Text("Loading", modifier = Modifier.align(Alignment.Center), color = Color.White)
@@ -48,7 +48,7 @@ fun AccountArtistComposable(item: AccountArtistItem) {
             KamelImage(
                 resource = resource,
                 contentDescription = item.name ?: "",
-                modifier = Modifier.size(90.dp).clip(RoundedCornerShape(8.dp)),
+                modifier = Modifier.size(70.dp).clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
         }

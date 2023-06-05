@@ -14,6 +14,7 @@ import com.yazantarifi.radio.core.shared.compose.components.composables.account.
 import com.yazantarifi.radio.core.shared.compose.components.composables.account.AccountInfoComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.account.AccountSectionComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.account.AccountSectionValueComposable
+import com.yazantarifi.radio.core.shared.compose.components.composables.account.AccountTrackComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeAlbumsComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeCategoriesComposable
 import com.yazantarifi.radio.core.shared.compose.components.composables.home.HomeChangeLayoutComposable
@@ -33,6 +34,7 @@ import com.yazantarifi.radio.core.shared.compose.components.models.account.Accou
 import com.yazantarifi.radio.core.shared.compose.components.models.account.AccountHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.account.AccountListSectionItem
 import com.yazantarifi.radio.core.shared.compose.components.models.account.AccountSectionNameItem
+import com.yazantarifi.radio.core.shared.compose.components.models.account.AccountTrackItem
 import com.yazantarifi.radio.core.shared.compose.components.models.account.RadioAccountItem
 
 @Composable
@@ -52,6 +54,7 @@ fun AccountComposable(viewModel: HomeViewModel) {
                         RadioAccountItem.TYPE_SECTION -> AccountSectionComposable(item = it as AccountSectionNameItem)
                         RadioAccountItem.TYPE_LIST_ITEM -> AccountSectionValueComposable(item = it as AccountListSectionItem)
                         RadioAccountItem.TYPE_ARTIST -> AccountArtistComposable(item = it as AccountArtistItem)
+                        RadioAccountItem.TYPE_TRACK -> AccountTrackComposable(item = it as AccountTrackItem)
                     }
                 }
             }
