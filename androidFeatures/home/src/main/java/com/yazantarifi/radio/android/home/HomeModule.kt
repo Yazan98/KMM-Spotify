@@ -1,5 +1,6 @@
 package com.yazantarifi.radio.android.home
 
+import com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase
 import com.yazantarifi.radio.useCases.GetCategoriesUseCase
 import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase
 import dagger.Module
@@ -12,6 +13,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object HomeModule {
+
+    @Provides
+    @Singleton
+    fun getGetAccountTreeInfoUseCase(httpClient: HttpClient): GetAccountTreeInfoUseCase {
+        return GetAccountTreeInfoUseCase(httpClient)
+    }
 
     @Provides
     @Singleton

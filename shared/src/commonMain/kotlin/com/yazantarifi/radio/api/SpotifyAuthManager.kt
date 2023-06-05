@@ -8,7 +8,7 @@ class SpotifyAuthManager {
     }
 
     fun getAuthLoginUrl(): String {
-        val scopeList = "user-read-private,user-read-email"
+        val scopeList = "user-read-private,user-read-email,user-follow-read,playlist-read-private,playlist-read-collaborative"
         return "https://accounts.spotify.com/authorize" +
                 "?client_id=$CLIENT_ID" +
                 "&response_type=code" +

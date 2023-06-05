@@ -9,9 +9,11 @@ import com.yazantarifi.kmm.sopy.base.useCases.SopifyState
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseListener
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseType
 import com.yazantarifi.kmm.sopy.base.viewModels.SopifyViewModel
+import com.yazantarifi.radio.core.shared.compose.components.composables.account.RadioAccountItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
+import com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase
 import com.yazantarifi.radio.useCases.GetCategoriesUseCase
 import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getHomeScreenItems: GetHomeScreenItemsUseCase,
     private val categoriesUseCase: GetCategoriesUseCase,
+    private val accountInfoUseCase: GetAccountTreeInfoUseCase,
     private val storageProvider: SopifyStorageProvider
 ): SopifyViewModel<HomeAction>() {
 
@@ -34,11 +37,13 @@ class HomeViewModel @Inject constructor(
     val categoriesLoadingListener by lazy { mutableStateOf(false) }
 
     val accountLoadingListener by lazy { mutableStateOf(false) }
+    val accountInfoListListener: MutableState<ArrayList<RadioAccountItem>> by lazy { mutableStateOf(arrayListOf()) }
 
     override suspend fun onNewActionTriggered(action: HomeAction) {
         when (action) {
             is HomeAction.GetFeed -> onGetHomeScreenFeedInfo(action.context)
             is HomeAction.GetCategoriesAction -> onGetCategories()
+            is HomeAction.GetAccountInfoAction -> onGetAccountInfo()
         }
     }
 
@@ -55,6 +60,27 @@ class HomeViewModel @Inject constructor(
                             is SopifyState.SopifyErrorState -> errorMessageListener.value = newState.exception.message ?: ""
                             is SopifyState.SopifySuccessState -> (newState.payload as? List<RadioCategoryItem>)?.let {
                                 categoriesListListener.value.addAll(it)
+                            }
+                        }
+                    }
+                }
+            }
+        )
+    }
+
+    private fun onGetAccountInfo() {
+        if (accountInfoListListener.value.isNotEmpty()) return
+        accountInfoUseCase.execute(
+            storageProvider.getAccessToken(),
+            object : SopifyUseCaseListener {
+                override fun onStateUpdated(newState: SopifyState) {
+                    scope.launch(Dispatchers.Main) {
+                        when (newState) {
+                            is SopifyState.SopifyEmptyState -> {}
+                            is SopifyState.SopifyLoadingState -> accountLoadingListener.value = newState.isLoading
+                            is SopifyState.SopifyErrorState -> errorMessageListener.value = newState.exception.message ?: ""
+                            is SopifyState.SopifySuccessState -> (newState.payload as? List<RadioAccountItem>)?.let {
+                                accountInfoListListener.value.addAll(it)
                             }
                         }
                     }
@@ -85,7 +111,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun getSupportedUseCases(): ArrayList<SopifyUseCaseType> {
-        return arrayListOf(getHomeScreenItems, categoriesUseCase)
+        return arrayListOf(getHomeScreenItems, categoriesUseCase, accountInfoUseCase)
     }
 
 }
