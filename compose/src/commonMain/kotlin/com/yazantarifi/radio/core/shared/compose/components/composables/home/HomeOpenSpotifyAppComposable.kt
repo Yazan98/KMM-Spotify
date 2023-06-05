@@ -34,7 +34,7 @@ import com.yazantarifi.radio.core.shared.compose.components.composables.getSecon
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeOpenSpotifyAppItem
 
 @Composable
-fun HomeOpenSpotifyAppComposable(item: HomeOpenSpotifyAppItem) {
+fun HomeOpenSpotifyAppComposable(item: HomeOpenSpotifyAppItem, onButtonClickListener: () -> Unit) {
     Box(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
         Box(modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(8.dp)).background(
             getSecondTextColor()
@@ -51,7 +51,7 @@ fun HomeOpenSpotifyAppComposable(item: HomeOpenSpotifyAppItem) {
                 Spacer(Modifier.height(10.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                     Button(
-                        onClick = {},
+                        onClick = onButtonClickListener,
                         shape = RoundedCornerShape(23.dp),
                         border = BorderStroke(3.dp, Color.White),
                         colors = ButtonDefaults.buttonColors(contentColor = Color.White, backgroundColor = Color.White),

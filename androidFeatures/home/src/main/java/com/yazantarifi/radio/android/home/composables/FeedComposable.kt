@@ -1,5 +1,7 @@
 package com.yazantarifi.radio.android.home.composables
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -43,6 +45,7 @@ import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAl
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
 import com.yazantarifi.radio.mappers.HomeScreenVerticalGridMapper
+import kotlinx.coroutines.flow.update
 
 @Composable
 fun FeedComposable(viewModel: HomeViewModel) {
@@ -74,6 +77,7 @@ fun FeedComposable(viewModel: HomeViewModel) {
 
 @Composable
 fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign: Int, onChangeClickListener: (Int) -> Unit) {
+    val context = LocalContext.current
     val filteredList by remember {
         mutableStateOf(HomeScreenVerticalGridMapper().getVerticalItems(viewModel.feedContentListener.value))
     }
@@ -88,7 +92,9 @@ fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign
                     RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = itemContent as HomeHeaderItem)
                     RadioHomeItem.TYPE_LAYOUT_DESIGN -> HomeChangeLayoutComposable(selectedListLayoutDesign, itemContent as HomeLayoutDesignItem, onChangeClickListener)
                     RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(itemContent as HomeNotificationPermissionItem)
-                    RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(itemContent as HomeOpenSpotifyAppItem)
+                    RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(itemContent as HomeOpenSpotifyAppItem) {
+                        openSpotifyApplication(context, viewModel)
+                    }
                     RadioHomeItem.TYPE_CATEGORY -> HomeCategoryComposable(itemContent as RadioCategoryItem)
                     RadioHomeItem.TYPE_PLAYLIST -> HomePlaylistComposable(itemContent as RadioPlaylist)
                     RadioHomeItem.TYPE_ALBUM -> HomeAlbumComposable(itemContent as RadioAlbum)
@@ -100,12 +106,15 @@ fun HomeGridContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign
 
 @Composable
 fun HomeLinearContentComposable(viewModel: HomeViewModel, selectedListLayoutDesign: Int, onChangeClickListener: (Int) -> Unit) {
+    val context = LocalContext.current
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(viewModel.feedContentListener.value) { item ->
             item?.let {
                 when (it.getItemViewType()) {
                     RadioHomeItem.TYPE_LIST_H_PLAYLIST -> HomePlaylistsComposable(itemParent = item as HomePlaylistsItem)
-                    RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(item as HomeOpenSpotifyAppItem)
+                    RadioHomeItem.TYPE_OPEN_SPOTIFY_APP -> HomeOpenSpotifyAppComposable(item as HomeOpenSpotifyAppItem) {
+                        openSpotifyApplication(context, viewModel)
+                    }
                     RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION -> HomeNotificationPermissionComposable(item as HomeNotificationPermissionItem)
                     RadioHomeItem.TYPE_LIST_CATEGORIES -> HomeCategoriesComposable(itemParent = item as HomeCategoriesItem)
                     RadioHomeItem.TYPE_HEADER -> HomeHeaderComposable(item = item as HomeHeaderItem)
@@ -114,5 +123,17 @@ fun HomeLinearContentComposable(viewModel: HomeViewModel, selectedListLayoutDesi
                 }
             }
         }
+    }
+}
+
+private fun openSpotifyApplication(context: Context, viewModel: HomeViewModel) {
+    val spotifyPackageName = "com.spotify.music"
+    val spotifyIntent = context.packageManager.getLaunchIntentForPackage(spotifyPackageName)
+
+    if (spotifyIntent != null) {
+        context.startActivity(spotifyIntent)
+    } else {
+        // Spotify app is not installed on the device
+        viewModel.errorMessageListener.update { RadioApplicationMessages.getMessage("spotify_not_installed") }
     }
 }

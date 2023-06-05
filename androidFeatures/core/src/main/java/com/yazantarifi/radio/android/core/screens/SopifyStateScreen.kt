@@ -24,16 +24,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.yazantarifi.kmm.sopy.base.viewModels.SopifyViewModel
 import com.yazantarifi.radio.android.core.RadioTheme
 import com.yazantarifi.radio.android.core.composables.RadioToolbar
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: ComponentActivity() {
 
     private val errorScreenListener: MutableState<Throwable?> by lazy { mutableStateOf(null) }
-    private val errorMessageListener: MutableState<String?> by lazy { mutableStateOf(null) }
+    private val errorScreenMessageListener: MutableState<String?> by lazy { mutableStateOf(null) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +69,10 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
                             onScreenContent(savedInstanceState).apply {
                                 setupErrorListeners(this)
 
-                                val isErrorMessageExists = !TextUtils.isEmpty(errorMessageListener.value)
+                                val isErrorMessageExists = !TextUtils.isEmpty(errorScreenMessageListener.value)
                                 if (isErrorMessageExists) {
                                     coroutineScope.launch {
-                                        scaffoldState.snackbarHostState.showSnackbar(errorMessageListener.value ?: "")
+                                        scaffoldState.snackbarHostState.showSnackbar(errorScreenMessageListener.value ?: "")
                                         errorMessageListener.value = ""
                                     }
                                 }
@@ -90,15 +93,19 @@ abstract class SopifyStateScreen<Action, ViewModel: SopifyViewModel<Action>>: Co
     }
 
     private fun setupErrorListeners(viewModel: ViewModel) {
-        lifecycleScope.launchWhenStarted {
-            viewModel.errorScreenListener.collect {
-                errorScreenListener.value = it
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.errorScreenListener.collectLatest {
+                    errorScreenListener.value = it
+                }
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.errorMessageListener.collect {
-                errorMessageListener.value = it
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.errorMessageListener.collectLatest {
+                    errorScreenMessageListener.value = it
+                }
             }
         }
     }
