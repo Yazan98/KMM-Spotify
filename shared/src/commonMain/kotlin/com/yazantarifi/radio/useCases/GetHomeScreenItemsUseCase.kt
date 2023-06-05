@@ -6,6 +6,7 @@ import com.yazantarifi.radio.RadioApplicationMessages
 import com.yazantarifi.radio.api.SpotifyApiHeadersBuilder
 import com.yazantarifi.radio.api.home.SpotifyFeaturedPlaylistsApiRequest
 import com.yazantarifi.radio.api.home.SpotifyGetCategoriesApiRequest
+import com.yazantarifi.radio.api.home.SpotifyGetCategoryPlaylistApiRequest
 import com.yazantarifi.radio.api.home.SpotifyNewAlbumsReleasesApiRequest
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
@@ -36,6 +37,10 @@ class GetHomeScreenItemsUseCase constructor(
 
     private val categoriesApiClient: SpotifyGetCategoriesApiRequest by lazy {
         SpotifyGetCategoriesApiRequest(false)
+    }
+
+    private val playlistsCategoryApiClient: SpotifyGetCategoryPlaylistApiRequest by lazy {
+        SpotifyGetCategoryPlaylistApiRequest()
     }
 
     data class RequestValue(
@@ -164,10 +169,65 @@ class GetHomeScreenItemsUseCase constructor(
             })
         }
 
+        if (playlistsCategoryApiClient.isRequestListenerAttachNeeded()) {
+            playlistsCategoryApiClient.addHttpClient(httpClient)
+            playlistsCategoryApiClient.addRequestListener(object : SopifyRequestListener<SpotifyFeaturedPlaylistsResponse> {
+                override fun onSuccess(responseValue: SpotifyFeaturedPlaylistsResponse) {
+                    val playlists = ArrayList<RadioPlaylist>()
+                    responseValue.playlists?.items?.let {
+                        playlists.addAll(it.map {  playlist ->
+                            var imageUrl: String = ""
+                            playlist.images?.forEach {
+                                imageUrl = it.url ?: ""
+                            }
+
+                            RadioPlaylist(
+                                id = playlist.id ?: "",
+                                image = imageUrl,
+                                name = playlist.name ?: "",
+                                ownerName = playlist.owner?.name,
+                                numberOfTracks = playlist.tracks?.total ?: 0
+                            )
+                        })
+                    }
+
+                    screenItems.add(HomePlaylistsItem(
+                        responseValue.sectionName ?: "",
+                        RadioApplicationMessages.getMessage("loading_image"),
+                        playlists
+                    ))
+                }
+
+                override fun onError(error: Throwable) {
+                    // Will Not Show the Item
+                }
+            })
+        }
+
         val headers = SpotifyApiHeadersBuilder.getApplicationBearerTokenHeaders(requestValue.token)
         featuredListApiClient.executeRequest(Unit, headers)
         newReleasesApiClient.executeRequest(Unit, headers)
         categoriesApiClient.executeRequest(Unit, headers)
+
+        playlistsCategoryApiClient.executeRequest(SpotifyGetCategoryPlaylistApiRequest.RequestParams(
+            RadioApplicationMessages.getMessage("top_pop"),
+            "0JQ5DAqbMKFEC4WFtoNRpw"
+        ), headers)
+
+        playlistsCategoryApiClient.executeRequest(SpotifyGetCategoryPlaylistApiRequest.RequestParams(
+            RadioApplicationMessages.getMessage("top_mood"),
+            "0JQ5DAqbMKFzHmL4tf05da"
+        ), headers)
+
+        playlistsCategoryApiClient.executeRequest(SpotifyGetCategoryPlaylistApiRequest.RequestParams(
+            RadioApplicationMessages.getMessage("top_gaming"),
+            "0JQ5DAqbMKFCfObibaOZbv"
+        ), headers)
+
+        playlistsCategoryApiClient.executeRequest(SpotifyGetCategoryPlaylistApiRequest.RequestParams(
+            RadioApplicationMessages.getMessage("top_workout"),
+            "0JQ5DAqbMKFAXlCG6QvYQ4"
+        ), headers)
 
         onSubmitLoadingState(false)
         onSubmitSuccessState(screenItems)
@@ -178,5 +238,6 @@ class GetHomeScreenItemsUseCase constructor(
         featuredListApiClient.clear()
         newReleasesApiClient.clear()
         categoriesApiClient.clear()
+        playlistsCategoryApiClient.clear()
     }
 }

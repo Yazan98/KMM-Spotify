@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SpotifyFeaturedPlaylistsResponse(
-    val message: String,
+    val message: String? = null,
+    val sectionName: String? = null,
     val playlists: SpotifyPlaylistsResponse? = null
 )
 
