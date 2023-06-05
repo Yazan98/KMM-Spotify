@@ -1,7 +1,10 @@
 package com.yazantarifi.radio.android.home.viewModels
 
+import android.app.NotificationManager
+import android.content.Context
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.core.app.NotificationManagerCompat
 import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyState
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseListener
@@ -31,7 +34,7 @@ class HomeViewModel @Inject constructor(
 
     override suspend fun onNewActionTriggered(action: HomeAction) {
         when (action) {
-            is HomeAction.GetFeed -> onGetHomeScreenFeedInfo()
+            is HomeAction.GetFeed -> onGetHomeScreenFeedInfo(action.context)
             is HomeAction.GetDiscoverContent -> onGetDiscoverInfo(action.isHardReload)
         }
     }
@@ -40,10 +43,10 @@ class HomeViewModel @Inject constructor(
 //        if (!isHardReload && discoverContentListener.value.isNotEmpty()) return
     }
 
-    private fun onGetHomeScreenFeedInfo() {
+    private fun onGetHomeScreenFeedInfo(context: Context) {
         if (feedContentListener.value.isNotEmpty()) return
         getHomeScreenItems.execute(
-            GetHomeScreenItemsUseCase.RequestValue(storageProvider.getAccessToken()),
+            GetHomeScreenItemsUseCase.RequestValue(storageProvider.getAccessToken(), android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R, NotificationManagerCompat.from(context).areNotificationsEnabled()),
             object : SopifyUseCaseListener {
                 override fun onStateUpdated(newState: SopifyState) {
                     scope.launch(Dispatchers.Main) {

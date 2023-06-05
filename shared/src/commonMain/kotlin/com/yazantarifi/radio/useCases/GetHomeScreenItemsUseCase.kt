@@ -12,12 +12,12 @@ import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsIte
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeHeaderItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
+import com.yazantarifi.radio.core.shared.compose.components.models.HomeNotificationPermissionItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioAlbum
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioPlaylist
-import com.yazantarifi.radio.models.SpotifyAlbum
 import com.yazantarifi.radio.models.SpotifyAlbumsResponse
 import com.yazantarifi.radio.models.SpotifyCategoriesResponse
 import com.yazantarifi.radio.models.SpotifyFeaturedPlaylistsResponse
@@ -44,7 +44,9 @@ class GetHomeScreenItemsUseCase constructor(
     }
 
     data class RequestValue(
-        val token: String
+        val token: String,
+        val isNotificationPermissionShouldShow: Boolean,
+        val isNotificationsEnabled: Boolean
     )
 
     override fun isConstraintsSupported(): Boolean {
@@ -208,6 +210,19 @@ class GetHomeScreenItemsUseCase constructor(
         featuredListApiClient.executeRequest(Unit, headers)
         newReleasesApiClient.executeRequest(Unit, headers)
         categoriesApiClient.executeRequest(Unit, headers)
+
+        if (requestValue.isNotificationPermissionShouldShow) {
+            screenItems.add(HomeNotificationPermissionItem(
+                true,
+                RadioApplicationMessages.getMessage("notification_permission_warning_message"),
+                RadioApplicationMessages.getMessage("notification_permission_title"),
+                "",
+                RadioApplicationMessages.getMessage("notification_permission_message"),
+                RadioApplicationMessages.getMessage("notification_permission_enable"),
+                RadioApplicationMessages.getMessage("notification_permission_disable"),
+                requestValue.isNotificationsEnabled
+            ))
+        }
 
         playlistsCategoryApiClient.executeRequest(SpotifyGetCategoryPlaylistApiRequest.RequestParams(
             RadioApplicationMessages.getMessage("top_pop"),

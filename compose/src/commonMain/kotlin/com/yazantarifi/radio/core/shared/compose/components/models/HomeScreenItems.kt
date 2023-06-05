@@ -50,7 +50,13 @@ data class HomeCategoriesItem(
 
 data class HomeNotificationPermissionItem(
     val isWarningMessageEnabled: Boolean = false,
-    val warningMessage: String
+    val warningMessage: String,
+    val title: String,
+    val iconUrl: String,
+    val message: String,
+    val enableButtonText: String,
+    val disableButtonText: String,
+    val isNotificationsPermissionEnabled: Boolean
 ): RadioHomeItem {
     override fun getItemViewType(): Int {
         return RadioHomeItem.TYPE_NOTIFICATIONS_PERMISSION

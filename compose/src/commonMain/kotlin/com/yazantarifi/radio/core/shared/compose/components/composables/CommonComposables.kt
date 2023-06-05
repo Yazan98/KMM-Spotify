@@ -19,3 +19,7 @@ fun getSecondTextColor(): Color {
         false -> Color(0xFFDCDCDC)
     }
 }
+
+fun getApplicationColor(): Color {
+    return Color(0xFF3DDC84)
+}
