@@ -9,7 +9,7 @@ import com.yazantarifi.kmm.sopy.base.useCases.SopifyState
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseListener
 import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseType
 import com.yazantarifi.kmm.sopy.base.viewModels.SopifyViewModel
-import com.yazantarifi.radio.core.shared.compose.components.composables.account.RadioAccountItem
+import com.yazantarifi.radio.core.shared.compose.components.models.account.RadioAccountItem
 import com.yazantarifi.radio.core.shared.compose.components.models.HomeLayoutDesignItem
 import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
 import com.yazantarifi.radio.core.shared.compose.components.models.items.RadioCategoryItem

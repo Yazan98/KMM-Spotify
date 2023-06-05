@@ -3,7 +3,7 @@ package com.yazantarifi.radio
 object RadioApplicationMessages {
 
     private val APPLICATION_MESSAGES = HashMap<String, String>().apply {
-        put("login_message_success:en", "Welcome to Reddit Client Application :D")
+        put("login_message_success:en", "Welcome to Spotify Client Application :D")
         put("loading_feed:en", "Loading Home Screen ...")
         put("home_title:en", "Welcome to Spotify Clone Application")
         put("home_change_design:en", "Change Items Scroll")
@@ -29,6 +29,7 @@ object RadioApplicationMessages {
         put("account_section_product:en", "Product")
         put("account_section_following_artists:en", "Following Artists")
         put("loading_categories:en", "Loading All Categories ...")
+        put("loading_account:en", "Loading Account Information")
         put("spotify_app_open_message:en", "Open Spotify Application to Get Access on A lot of Music More than This Content")
         put("notification_permission_message:en", "Radio Application Need To Show Notifications, Click on Allow to Take Notification Permission :D")
         put("notification_permission_warning_message:en", "Warning: You Cant get Notifications Unless Notifications Enabled")

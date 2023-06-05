@@ -11,12 +11,14 @@ import com.yazantarifi.kmm.sopy.base.context.SopifyStorageProvider;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen;
 import com.yazantarifi.radio.android.auth.RadioAuthScreen_MembersInjector;
 import com.yazantarifi.radio.android.home.HomeModule;
+import com.yazantarifi.radio.android.home.HomeModule_GetGetAccountTreeInfoUseCaseFactory;
 import com.yazantarifi.radio.android.home.HomeModule_GetGetCategoriesUseCaseFactory;
 import com.yazantarifi.radio.android.home.HomeModule_GetGetHomeScreenItemsUseCaseFactory;
 import com.yazantarifi.radio.android.home.RadioHomeScreen;
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel;
 import com.yazantarifi.radio.android.home.viewModels.HomeViewModel_HiltModules_KeyModule_ProvideFactory;
 import com.yazantarifi.radio.useCases.GetAccessTokenUseCase;
+import com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase;
 import com.yazantarifi.radio.useCases.GetCategoriesUseCase;
 import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase;
 import dagger.hilt.android.ActivityRetainedLifecycle;
@@ -485,7 +487,7 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.yazantarifi.radio.android.home.viewModels.HomeViewModel 
-          return (T) new HomeViewModel(singletonCImpl.getGetHomeScreenItemsUseCaseProvider.get(), singletonCImpl.getGetCategoriesUseCaseProvider.get(), singletonCImpl.getStorageProviderImplementationInstanceProvider.get());
+          return (T) new HomeViewModel(singletonCImpl.getGetHomeScreenItemsUseCaseProvider.get(), singletonCImpl.getGetCategoriesUseCaseProvider.get(), singletonCImpl.getGetAccountTreeInfoUseCaseProvider.get(), singletonCImpl.getStorageProviderImplementationInstanceProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -576,6 +578,8 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
     private Provider<GetCategoriesUseCase> getGetCategoriesUseCaseProvider;
 
+    private Provider<GetAccountTreeInfoUseCase> getGetAccountTreeInfoUseCaseProvider;
+
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
       initialize(applicationContextModuleParam);
@@ -589,6 +593,7 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
       this.getHttpClientProvider = DoubleCheck.provider(new SwitchingProvider<HttpClient>(singletonCImpl, 3));
       this.getGetHomeScreenItemsUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<GetHomeScreenItemsUseCase>(singletonCImpl, 2));
       this.getGetCategoriesUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<GetCategoriesUseCase>(singletonCImpl, 4));
+      this.getGetAccountTreeInfoUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<GetAccountTreeInfoUseCase>(singletonCImpl, 5));
     }
 
     @Override
@@ -638,6 +643,9 @@ public final class DaggerRadioApplication_HiltComponents_SingletonC {
 
           case 4: // com.yazantarifi.radio.useCases.GetCategoriesUseCase 
           return (T) HomeModule_GetGetCategoriesUseCaseFactory.getGetCategoriesUseCase(singletonCImpl.getHttpClientProvider.get());
+
+          case 5: // com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase 
+          return (T) HomeModule_GetGetAccountTreeInfoUseCaseFactory.getGetAccountTreeInfoUseCase(singletonCImpl.getHttpClientProvider.get());
 
           default: throw new AssertionError(id);
         }
