@@ -1,10 +1,3 @@
-package com.yazantarifi.radio.core.shared.compose.components
-
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-
-actual class ComposeScope {
-    actual fun getScope(): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:97daaf272185db95083079b093668919b1dea544ef0bddb13b5625c35e088d75
+size 261

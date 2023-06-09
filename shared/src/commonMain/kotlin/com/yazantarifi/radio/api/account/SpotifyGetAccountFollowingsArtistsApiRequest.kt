@@ -1,35 +1,3 @@
-package com.yazantarifi.radio.api.account
-
-import com.yazantarifi.kmm.sopy.api.SopifyOneRequest
-import com.yazantarifi.radio.models.SpotifyArtistsResponse
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.statement.bodyAsText
-import io.ktor.http.HttpStatusCode
-
-class SpotifyGetAccountFollowingsArtistsApiRequest: SopifyOneRequest<Unit, SpotifyArtistsResponse>() {
-    override fun getRequestUrl(): String {
-        return "https://api.spotify.com/v1/me/following?type=artist&offset=0&limit=40"
-    }
-
-    override suspend fun executeRequest(requestBody: Unit, headers: List<Pair<String, String>>) {
-        try {
-            val response = httpClient?.get(getRequestUrl()) {
-                headers.forEach {
-                    header(it.first, it.second)
-                }
-            }
-
-            if (isSuccessResponse(response?.status ?: HttpStatusCode.BadRequest)) {
-                response?.body<SpotifyArtistsResponse>()?.let {
-                    requestListener?.onSuccess(it)
-                }
-            } else {
-                requestListener?.onError(Throwable(response?.bodyAsText()))
-            }
-        } catch (ex: Exception) {
-            requestListener?.onError(ex)
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6b0d7d46b82f2f44c665be85b797b2465c5c2518d517e682c8d778be981321e9
+size 1288

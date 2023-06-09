@@ -1,15 +1,3 @@
-package hilt_aggregated_deps;
-
-import dagger.hilt.processor.internal.aggregateddeps.AggregatedDeps;
-import javax.annotation.processing.Generated;
-
-/**
- * This class should only be referenced by generated code! This class aggregates information across multiple compilations.
- */
-@AggregatedDeps(
-    components = "dagger.hilt.components.SingletonComponent",
-    modules = "com.yazantarifi.radio.android.ApplicationModule"
-)
-@Generated("dagger.hilt.processor.internal.aggregateddeps.AggregatedDepsGenerator")
-public class _com_yazantarifi_radio_android_ApplicationModule {
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f0d77f368d30edcb931fb0509a37485c172930c321228f21f3aebe088b19433e
+size 573

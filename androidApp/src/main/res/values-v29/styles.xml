@@ -1,10 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.App" parent="Base.Theme.App">
-        <!-- Transparent system bars for edge-to-edge. -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-    </style>
-
-    <style name="Theme.MainScreen" parent="Base.Theme.App"/>
-</resources>
+version https://git-lfs.github.com/spec/v1
+oid sha256:92d299ecd0c4649bd00db4284aba50223c474a59ee3c9e814e2dec6fd50636a4
+size 404

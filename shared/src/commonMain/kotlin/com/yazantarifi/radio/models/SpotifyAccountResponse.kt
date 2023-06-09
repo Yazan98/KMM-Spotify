@@ -1,21 +1,3 @@
-package com.yazantarifi.radio.models
-
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class SpotifyAccountResponse(
-    val country: String? = "",
-    val id: String? = "",
-    @SerialName("display_name") val name: String? = "",
-    @SerialName("email") val email: String? = "",
-    @SerialName("product") val product: String? = "",
-    @SerialName("type") val type: String? = "",
-    @SerialName("followers") val followers: AccountFollowers? = null,
-    @SerialName("images") val images: List<SpotifyPlaylistImage>? = null,
-)
-
-@Serializable
-data class AccountFollowers(
-    val total: Int? = 0
-)
+version https://git-lfs.github.com/spec/v1
+oid sha256:a86f768bce1cd2432276b5a2c5d8e6bac01c3709d885b1db3ed1daf0306f21e0
+size 651

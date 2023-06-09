@@ -1,17 +1,3 @@
-package com.yazantarifi.radio.android;
-
-import dagger.hilt.InstallIn;
-import dagger.hilt.codegen.OriginatingElement;
-import dagger.hilt.components.SingletonComponent;
-import dagger.hilt.internal.GeneratedEntryPoint;
-import javax.annotation.processing.Generated;
-
-@OriginatingElement(
-    topLevelClass = RadioApplication.class
-)
-@GeneratedEntryPoint
-@InstallIn(SingletonComponent.class)
-@Generated("dagger.hilt.android.processor.internal.androidentrypoint.InjectorEntryPointGenerator")
-public interface RadioApplication_GeneratedInjector {
-  void injectRadioApplication(RadioApplication radioApplication);
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b3c32627535a0e6548e95c38c27e9012db9181fcc5c1e2d1217aae6bfdaf032
+size 608

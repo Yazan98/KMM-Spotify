@@ -1,18 +1,3 @@
-package com.yazantarifi.radio.mappers
-
-object RadioNumberFormatter {
-
-    fun addCommasToNumber(number: String): String {
-        val stringBuilder = StringBuilder(number)
-        val length = stringBuilder.length
-
-        var commaIndex = length - 3
-        while (commaIndex > 0) {
-            stringBuilder.insert(commaIndex, ',')
-            commaIndex -= 3
-        }
-
-        return stringBuilder.toString()
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:609fd15beeb80fc05e3504b8e7e7d07b5567667949e378e67c8ab7a0daf3d13e
+size 421

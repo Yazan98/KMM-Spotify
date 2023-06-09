@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="?attr/colorPrimary" />
-    <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
-</adaptive-icon>
+version https://git-lfs.github.com/spec/v1
+oid sha256:5519e4b5931845190805ff78d3c6b21bdb483471844f1199211a311ac857424d
+size 255

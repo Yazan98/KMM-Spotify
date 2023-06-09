@@ -1,24 +1,3 @@
-package com.yazantarifi.android.radio.playlists
-
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.ext.junit.runners.AndroidJUnit4
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
-    @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.yazantarifi.android.radio.playlists.test", appContext.packageName)
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4048548f887e574908c591d661f2952b06a0c6e8b1c4fca37cfba4480437ef97
+size 710

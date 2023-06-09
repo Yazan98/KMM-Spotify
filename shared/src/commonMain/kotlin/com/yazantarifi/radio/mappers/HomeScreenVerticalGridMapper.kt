@@ -1,32 +1,3 @@
-package com.yazantarifi.radio.mappers
-
-import com.yazantarifi.radio.core.shared.compose.components.models.HomeAlbumsItem
-import com.yazantarifi.radio.core.shared.compose.components.models.HomeCategoriesItem
-import com.yazantarifi.radio.core.shared.compose.components.models.HomePlaylistsItem
-import com.yazantarifi.radio.core.shared.compose.components.models.HomeSectionHeaderItem
-import com.yazantarifi.radio.core.shared.compose.components.models.RadioHomeItem
-
-class HomeScreenVerticalGridMapper {
-    fun getVerticalItems(items: List<RadioHomeItem?>): List<RadioHomeItem> {
-        val filteredItems = ArrayList<RadioHomeItem>()
-        items.forEach {
-            it?.let {
-                if (it.isMultiItems()) {
-                    if (it is HomeAlbumsItem) {
-                        filteredItems.add(HomeSectionHeaderItem(it.title))
-                    } else if (it is HomePlaylistsItem) {
-                        filteredItems.add(HomeSectionHeaderItem(it.title))
-                    } else if (it is HomeCategoriesItem) {
-                        filteredItems.add(HomeSectionHeaderItem(it.title))
-                    }
-
-                    filteredItems.addAll(it.getContentList())
-                } else {
-                    filteredItems.add(it)
-                }
-            }
-        }
-
-        return filteredItems
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:9e75cb84e9bf13452d448fa14aee1eb24555e81e9992994e29b6a14b7d0ea6cb
+size 1242

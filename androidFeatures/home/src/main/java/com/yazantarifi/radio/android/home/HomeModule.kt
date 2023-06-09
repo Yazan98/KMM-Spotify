@@ -1,35 +1,3 @@
-package com.yazantarifi.radio.android.home
-
-import com.yazantarifi.radio.useCases.GetAccountTreeInfoUseCase
-import com.yazantarifi.radio.useCases.GetCategoriesUseCase
-import com.yazantarifi.radio.useCases.GetHomeScreenItemsUseCase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import io.ktor.client.HttpClient
-import javax.inject.Singleton
-
-@Module
-@InstallIn(SingletonComponent::class)
-object HomeModule {
-
-    @Provides
-    @Singleton
-    fun getGetAccountTreeInfoUseCase(httpClient: HttpClient): GetAccountTreeInfoUseCase {
-        return GetAccountTreeInfoUseCase(httpClient)
-    }
-
-    @Provides
-    @Singleton
-    fun getGetCategoriesUseCase(httpClient: HttpClient): GetCategoriesUseCase {
-        return GetCategoriesUseCase(httpClient)
-    }
-
-    @Provides
-    @Singleton
-    fun getGetHomeScreenItemsUseCase(httpClient: HttpClient): GetHomeScreenItemsUseCase {
-        return GetHomeScreenItemsUseCase(httpClient)
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d91e0c7dbc737269100827af048be202e7ca2a91e6141147176a5f90d083ebfd
+size 1145

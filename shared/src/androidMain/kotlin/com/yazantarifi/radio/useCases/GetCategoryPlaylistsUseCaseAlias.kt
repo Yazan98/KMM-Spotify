@@ -1,7 +1,3 @@
-package com.yazantarifi.radio.useCases
-
-import com.yazantarifi.kmm.sopy.base.useCases.SopifyUseCaseAlias
-import io.ktor.client.HttpClient
-import javax.inject.Inject
-
-class GetCategoryPlaylistsUseCaseAlias @Inject constructor(): SopifyUseCaseAlias<GetCategoryPlaylistsUseCase>()
+version https://git-lfs.github.com/spec/v1
+oid sha256:fb26cd111ab483a80c8a4165e8faec60ed5356f0a4ed03301059b6b69ce6b5a3
+size 242

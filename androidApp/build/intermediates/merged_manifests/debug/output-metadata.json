@@ -1,20 +1,3 @@
-{
-  "version": 3,
-  "artifactType": {
-    "type": "MERGED_MANIFESTS",
-    "kind": "Directory"
-  },
-  "applicationId": "com.yazantarifi.radio.android",
-  "variantName": "debug",
-  "elements": [
-    {
-      "type": "SINGLE",
-      "filters": [],
-      "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "AndroidManifest.xml"
-    }
-  ],
-  "elementType": "File"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d02221219f2d55b52ea6edce1103bcedbf677fb9aee1ae289b77d8d31b54930
+size 398

@@ -1,12 +1,3 @@
-/**
- * Automatically generated file. DO NOT MODIFY
- */
-package com.yazantarifi.radio.android;
-
-public final class BuildConfig {
-  public static final boolean DEBUG = Boolean.parseBoolean("true");
-  public static final String APPLICATION_ID = "com.yazantarifi.radio.android";
-  public static final String BUILD_TYPE = "debug";
-  public static final int VERSION_CODE = 1;
-  public static final String VERSION_NAME = "1.0";
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b68de9e73fa39b1a1b933ff05ddcbfcca7ec7abf175ae2bd45b558f71522b7bf
+size 423

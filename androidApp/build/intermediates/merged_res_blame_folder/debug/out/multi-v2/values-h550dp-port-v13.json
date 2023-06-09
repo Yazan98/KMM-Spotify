@@ -1,19 +1,3 @@
-{
-    "logs": [
-        {
-            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-h550dp-port-v13/values-h550dp-port-v13.xml",
-            "map": [
-                {
-                    "source": "/Users/yazantarifi/.gradle/caches/transforms-3/fed64cea703f1483a75e94be910c159d/transformed/material-1.8.0-alpha01/res/values-h550dp-port-v13/values-h550dp-port-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "76",
-                        "endOffsets": "127"
-                    }
-                }
-            ]
-        }
-    ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7354200fd940e642756121e3651fe713afc161e84de9c337cdf9e547accdd5cb
+size 734
