@@ -1,0 +1,9 @@
+androidApp/build
+shared/build
+compose/build
+sopify/build
+
+androidApp/build/**
+shared/build/**
+compose/build/**
+sopify/build/**
