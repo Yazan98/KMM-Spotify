@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9ce00045f39a91c11c2eb6235ec6b20e9e4fe8ab318002744f33b92a16ea7fcf
-size 618
+package hilt_aggregated_deps;
+
+import dagger.hilt.processor.internal.aggregateddeps.AggregatedDeps;
+import javax.annotation.processing.Generated;
+
+/**
+ * This class should only be referenced by generated code! This class aggregates information across multiple compilations.
+ */
+@AggregatedDeps(
+    components = "dagger.hilt.android.components.ActivityComponent",
+    entryPoints = "com.yazantarifi.radio.android.RadioIntroScreen_GeneratedInjector"
+)
+@Generated("dagger.hilt.processor.internal.aggregateddeps.AggregatedDepsGenerator")
+public class _com_yazantarifi_radio_android_RadioIntroScreen_GeneratedInjector {
+}

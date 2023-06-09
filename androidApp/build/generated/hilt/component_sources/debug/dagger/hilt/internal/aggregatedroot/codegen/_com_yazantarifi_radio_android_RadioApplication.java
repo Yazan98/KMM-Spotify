@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:aa76feb4104a12b43a3525e8d19c1f10fbe3f6daf2ec20ad4599b76ab4220ba1
-size 875
+package dagger.hilt.internal.aggregatedroot.codegen;
+
+import dagger.hilt.android.HiltAndroidApp;
+import dagger.hilt.internal.aggregatedroot.AggregatedRoot;
+import javax.annotation.processing.Generated;
+
+/**
+ * This class should only be referenced by generated code! This class aggregates information across multiple compilations.
+ */
+@AggregatedRoot(
+    root = "com.yazantarifi.radio.android.RadioApplication",
+    rootPackage = "com.yazantarifi.radio.android",
+    originatingRoot = "com.yazantarifi.radio.android.RadioApplication",
+    originatingRootPackage = "com.yazantarifi.radio.android",
+    rootAnnotation = HiltAndroidApp.class,
+    rootSimpleNames = "RadioApplication",
+    originatingRootSimpleNames = "RadioApplication"
+)
+@Generated("dagger.hilt.processor.internal.root.AggregatedRootGenerator")
+public class _com_yazantarifi_radio_android_RadioApplication {
+}

@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:44c1b7f7ec3d1e94ed4760655d0a749d5683fb3e6cea54ca17e90bb67973fed9
-size 353
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App" parent="Base.Theme.App">
+        
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+    <style name="Theme.MainScreen" parent="Base.Theme.App"/>
+</resources>

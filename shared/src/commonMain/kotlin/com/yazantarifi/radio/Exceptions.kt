@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a461d3898976d41319123ef6ac6b8123ce2c11dbdadd2476feed546a6bec4cc4
-size 541
+package com.yazantarifi.radio
+
+class SopifyUnknownException constructor(cause: Throwable): Throwable(cause)
+open class SopifyException constructor(override val message: String?): Throwable(message)
+
+class SopifyNoInternetException: SopifyException("No Internet Connection")
+
+class SopifyEmptyStringException constructor(
+    private val key: String
+): SopifyException("String Empty : $key")
+
+class SopifyConstraintsException constructor(
+    val exceptions: ArrayList<Throwable>,
+    override val message: String
+): SopifyException(message)

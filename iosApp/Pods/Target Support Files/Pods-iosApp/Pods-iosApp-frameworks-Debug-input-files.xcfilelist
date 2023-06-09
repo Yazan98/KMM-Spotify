@@ -1,3 +1,5 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:504cf59dcc1b78adc99da5e8c017a6c7ee71c8f1dd9bb4e0ac3d216232c8c9b2
-size 353
+${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh
+${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework
+${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework
+${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework
+${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework

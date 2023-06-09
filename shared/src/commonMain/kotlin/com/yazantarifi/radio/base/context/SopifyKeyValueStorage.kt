@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fc52bb05212cf96ef4db6a330a6c0115dc60b7bbd8130abca2f0ff7aeae8470c
-size 425
+package com.yazantarifi.radio.base.context
+
+expect fun SopifyContext.putInt(key: String, value: Int)
+
+expect fun SopifyContext.getInt(key: String, default: Int): Int
+
+expect fun SopifyContext.putString(key: String, value: String)
+
+expect fun SopifyContext.getString(key: String) : String?
+
+expect fun SopifyContext.putBool(key: String, value: Boolean)
+
+expect fun SopifyContext.getBool(key: String, default: Boolean): Boolean

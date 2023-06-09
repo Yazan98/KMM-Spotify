@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:86c67bb73afdd7b9c82d9e6d9cbd192efabf931a389131f0c6ff11f5e11d5663
-size 523
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+#import "MDFInternationalization.h"
+#import "MDFRTL.h"
+#import "NSLocale+MaterialRTL.h"
+#import "NSString+MaterialBidi.h"
+#import "UIImage+MaterialRTL.h"
+#import "UIView+MaterialRTL.h"
+
+FOUNDATION_EXPORT double MDFInternationalizationVersionNumber;
+FOUNDATION_EXPORT const unsigned char MDFInternationalizationVersionString[];
+

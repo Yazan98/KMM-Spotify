@@ -1,3 +1,43 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7c030d5c3635790949b51904882de32142bbf1f5edaa51e777d0d81331bd163f
-size 1378
+//
+//  CategoriesTabScreen.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import SwiftUI
+import shared
+
+struct CategoriesTabScreen: View {
+    
+    @ObservedObject var viewModel: HomeViewModel
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
+        ZStack {
+            if viewModel.categoriesScreenLoadingState {
+                ProgressView().progressViewStyle(CircularProgressViewStyle())
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                        ForEach(viewModel.categoriesScreenItems, id: \.self) { element in
+                            NavigationLink(destination: EmptyView()) {
+                                CategoryComposeView(category: element).onAppear {
+                                    print("Screen Item : \(element)")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            if viewModel.categoriesScreenItems.isEmpty {
+                viewModel.getViewModelInstance()?.execute(action: GetCategoriesScreenContentAction())
+            }
+        }
+    }
+}

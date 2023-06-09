@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c32c60c227ca0d6c902a4f4212efdb10a77482930003d62c2ede71b568e97cbd
-size 810
+{
+    "logs": [
+        {
+            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-v26/values-v26.xml",
+            "map": [
+                {
+                    "source": "/Users/yazantarifi/.gradle/caches/transforms-3/9ccc96f4df8dc06c84c16df6683a1c75/transformed/appcompat-1.5.0/res/values-v26/values-v26.xml",
+                    "from": {
+                        "startLines": "2,3,4,8,12,16",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,130,217,381,557,796",
+                        "endLines": "2,3,7,11,15,16",
+                        "endColumns": "74,86,12,12,12,92",
+                        "endOffsets": "125,212,376,552,791,884"
+                    }
+                }
+            ]
+        }
+    ]
+}

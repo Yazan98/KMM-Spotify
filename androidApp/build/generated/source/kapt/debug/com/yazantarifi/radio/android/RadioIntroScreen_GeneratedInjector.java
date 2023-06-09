@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:985ff21ebed4cda0df599893e3e64159516473b446af34dfc1eedd40c69c0019
-size 614
+package com.yazantarifi.radio.android;
+
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ActivityComponent;
+import dagger.hilt.codegen.OriginatingElement;
+import dagger.hilt.internal.GeneratedEntryPoint;
+import javax.annotation.processing.Generated;
+
+@OriginatingElement(
+    topLevelClass = RadioIntroScreen.class
+)
+@GeneratedEntryPoint
+@InstallIn(ActivityComponent.class)
+@Generated("dagger.hilt.android.processor.internal.androidentrypoint.InjectorEntryPointGenerator")
+public interface RadioIntroScreen_GeneratedInjector {
+  void injectRadioIntroScreen(RadioIntroScreen radioIntroScreen);
+}

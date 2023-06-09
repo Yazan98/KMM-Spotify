@@ -1,3 +1,39 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bdc767ff81e3ea2eafc75ecf1035a5f587ed7e0455c61b8bb5f86066ff4b45a8
-size 1140
+package com.yazantarifi.radio.android;
+
+import dagger.internal.DaggerGenerated;
+import dagger.internal.Factory;
+import dagger.internal.Preconditions;
+import dagger.internal.QualifierMetadata;
+import dagger.internal.ScopeMetadata;
+import io.ktor.client.HttpClient;
+import javax.annotation.processing.Generated;
+
+@ScopeMetadata("javax.inject.Singleton")
+@QualifierMetadata
+@DaggerGenerated
+@Generated(
+    value = "dagger.internal.codegen.ComponentProcessor",
+    comments = "https://dagger.dev"
+)
+@SuppressWarnings({
+    "unchecked",
+    "rawtypes"
+})
+public final class ApplicationModule_GetHttpClientFactory implements Factory<HttpClient> {
+  @Override
+  public HttpClient get() {
+    return getHttpClient();
+  }
+
+  public static ApplicationModule_GetHttpClientFactory create() {
+    return InstanceHolder.INSTANCE;
+  }
+
+  public static HttpClient getHttpClient() {
+    return Preconditions.checkNotNullFromProvides(ApplicationModule.INSTANCE.getHttpClient());
+  }
+
+  private static final class InstanceHolder {
+    private static final ApplicationModule_GetHttpClientFactory INSTANCE = new ApplicationModule_GetHttpClientFactory();
+  }
+}

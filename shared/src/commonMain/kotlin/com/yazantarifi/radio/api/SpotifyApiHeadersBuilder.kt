@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0774c76f4afc3047da6ce8f88130c369e7337c17361a9ca05070a2ff53a56bc6
-size 485
+package com.yazantarifi.radio.api
+
+object SpotifyApiHeadersBuilder {
+    fun getApplicationAuthHeader(): List<Pair<String, String>> {
+        return arrayListOf(
+            "Authorization" to "Basic MWZjYTE1MDIyMDhlNDRhNWI3YmU4YWE5MTliYTU4YmM6YzBhMzM2Y2JlODY0NDNiYWE1MDFmYmEwOGVlNDMxMmY="
+        )
+    }
+
+    fun getApplicationBearerTokenHeaders(token: String): List<Pair<String, String>> {
+        return arrayListOf(
+            "Authorization" to "Bearer $token"
+        )
+    }
+}

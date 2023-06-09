@@ -1,3 +1,50 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f7cfcf5fa99e1a2a7f7fad8202724f71bc4b6341633c171088afcc1ea9b4ace7
-size 1794
+package com.yazantarifi.radio.api
+
+import com.yazantarifi.radio.base.api.SopifyOneRequest
+import com.yazantarifi.radio.models.SpotifyAuthResponse
+import io.ktor.client.call.body
+import io.ktor.client.request.forms.FormDataContent
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
+import io.ktor.http.Parameters
+import io.ktor.util.InternalAPI
+
+class SpotifyAuthApiRequest: SopifyOneRequest<String, SpotifyAuthResponse>() {
+
+    @OptIn(InternalAPI::class)
+    override suspend fun executeRequest(requestBody: String, headers: List<Pair<String, String>>) {
+        try {
+            val apiRequestBody = Parameters.build {
+                append("grant_type", "authorization_code")
+                append("code", requestBody)
+                append("redirect_uri", "http://localhost")
+                append("client_id", SpotifyAuthManager.CLIENT_ID)
+                append("client_secret", SpotifyAuthManager.SECRETE_KEY)
+            }
+
+            val response = httpClient?.post(getRequestUrl()) {
+                body = FormDataContent(apiRequestBody)
+                headers.forEach {
+                    header(it.first, it.second)
+                }
+            }
+
+            if (isSuccessResponse(response?.status ?: HttpStatusCode.BadRequest)) {
+                response?.body<SpotifyAuthResponse>()?.let {
+                    requestListener?.onSuccess(it)
+                }
+            } else {
+                requestListener?.onError(Throwable(response?.bodyAsText()))
+            }
+        } catch (ex: Exception) {
+            requestListener?.onError(ex)
+        }
+    }
+
+    override fun getRequestUrl(): String {
+        return "https://accounts.spotify.com/api/token"
+    }
+
+}

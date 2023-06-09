@@ -1,3 +1,39 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7288d330b68e08969a5cd945c487aac6ea64501418c47dcdb6d0c9a978a504ee
-size 1626
+Pod::Spec.new do |spec|
+    spec.name                     = 'compose'
+    spec.version                  = '1.1'
+    spec.homepage                 = 'Link to the Shared Module homepage'
+    spec.source                   = { :http=> ''}
+    spec.authors                  = ''
+    spec.license                  = ''
+    spec.summary                  = 'Some description for the Shared Module'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/compose.framework'
+    spec.libraries                = 'c++'
+    spec.ios.deployment_target = '14.1'
+                
+                
+    spec.pod_target_xcconfig = {
+        'KOTLIN_PROJECT_PATH' => ':compose',
+        'PRODUCT_MODULE_NAME' => 'compose',
+    }
+                
+    spec.script_phases = [
+        {
+            :name => 'Build compose',
+            :execution_position => :before_compile,
+            :shell_path => '/bin/sh',
+            :script => <<-SCRIPT
+                if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+                  echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \"YES\""
+                  exit 0
+                fi
+                set -ev
+                REPO_ROOT="$PODS_TARGET_SRCROOT"
+                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                    -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
+                    -Pkotlin.native.cocoapods.archs="$ARCHS" \
+                    -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
+            SCRIPT
+        }
+    ]
+                
+end

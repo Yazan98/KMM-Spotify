@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:513d1e09eddde1ddffcd6325f5f75da9e7aa02ee02df79ded9e7102512fd77b9
-size 779
+{
+    "logs": [
+        {
+            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/Users/yazantarifi/.gradle/caches/transforms-3/9ccc96f4df8dc06c84c16df6683a1c75/transformed/appcompat-1.5.0/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

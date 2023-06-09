@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9e37f14ad82e78c5cec9d0f25ad07c3ff8999570acbac0787bdcecf67a328ca3
-size 1007
+{
+    "logs": [
+        {
+            "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "/Users/yazantarifi/KMM-Spotify/androidApp/src/main/res/values-v29/styles.xml",
+                    "from": {
+                        "startLines": "2,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,335",
+                        "endLines": "6,8",
+                        "endColumns": "12,60",
+                        "endOffsets": "329,391"
+                    },
+                    "to": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,284",
+                        "endLines": "6,7",
+                        "endColumns": "12,60",
+                        "endOffsets": "279,340"
+                    }
+                }
+            ]
+        }
+    ]
+}

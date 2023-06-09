@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:60b6eb60a5f91a0378ca1414cc85b8956255c214d376e1560918c7cb2fd8c0a2
-size 693
+package com.yazantarifi.radio.base.api
+
+abstract class SopifyOneRequest<RequestBody, ResponseValue>: SopifyRequestManager() {
+
+    protected var requestListener: SopifyRequestListener<ResponseValue>? = null
+
+    fun addRequestListener(requestListener: SopifyRequestListener<ResponseValue>) {
+        this.requestListener = requestListener
+    }
+
+    fun isRequestListenerAttachNeeded(): Boolean {
+        return this.requestListener == null
+    }
+
+    override fun clear() {
+        super.clear()
+        requestListener = null
+    }
+
+    protected abstract fun getRequestUrl(): String
+
+    abstract suspend fun executeRequest(requestBody: RequestBody, headers: List<Pair<String, String>>)
+
+}

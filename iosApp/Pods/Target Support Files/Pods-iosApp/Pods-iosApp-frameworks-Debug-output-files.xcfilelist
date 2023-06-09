@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:851ed0e38b8e2a7cf40e3c80b59823430d06535cdaa8e8d081ddb44c9ca9ae64
-size 300
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework

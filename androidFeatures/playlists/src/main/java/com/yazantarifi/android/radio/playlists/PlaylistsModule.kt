@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:524402e09bd2edcc9f7be0fa276490b7338ef76f728afc92c3a175ae1d389622
-size 848
+package com.yazantarifi.android.radio.playlists
+
+import com.yazantarifi.radio.android.core.RadioApplicationProps
+import com.yazantarifi.radio.base.HttpBaseClient
+import com.yazantarifi.radio.useCases.GetCategoryPlaylistsUseCase
+import com.yazantarifi.radio.useCases.GetCategoryPlaylistsUseCaseAlias
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+
+@Module
+@InstallIn(SingletonComponent::class)
+object PlaylistsModule {
+
+    @Provides
+    fun getGetCategoryPlaylistsUseCase(): GetCategoryPlaylistsUseCaseAlias {
+        return GetCategoryPlaylistsUseCaseAlias().apply {
+            addInstance(GetCategoryPlaylistsUseCase().apply {
+                addHttpClient(RadioApplicationProps.getHttpClientInstance() ?: HttpBaseClient().httpClient)
+            })
+        }
+    }
+
+}
+

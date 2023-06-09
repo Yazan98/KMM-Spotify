@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6732e530ad5168d9fac772f7aaf04b017df886976724baf422b8512084996f82
-size 969
+package com.yazantarifi.radio.composable.composables.account
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.unit.dp
+import com.yazantarifi.radio.composable.composables.getTextColor
+import com.yazantarifi.radio.composable.models.account.AccountSectionNameItem
+
+@Composable
+fun AccountSectionComposable(item: AccountSectionNameItem) {
+    Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
+        Text(item.name, color = getTextColor(), fontSize = TextUnit(15f, TextUnitType.Sp))
+        Spacer(Modifier.height(5.dp))
+    }
+}

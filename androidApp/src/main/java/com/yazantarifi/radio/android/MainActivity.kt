@@ -1,3 +1,40 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8b825056acb2b3ffc31a98f20204f34a9a4d0e67d2ae9ff230467f523876af2f
-size 1057
+package com.yazantarifi.radio.android
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.yazantarifi.radio.Greeting
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MyApplicationTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    GreetingView(Greeting().greet())
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GreetingView(text: String) {
+    Text(text = text)
+}
+
+@Preview
+@Composable
+fun DefaultPreview() {
+    MyApplicationTheme {
+        GreetingView("Hello, Android!")
+    }
+}

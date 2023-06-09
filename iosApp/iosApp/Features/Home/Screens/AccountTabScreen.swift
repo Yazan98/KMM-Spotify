@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:71ac42925617e9539b808ea35acb21d85ce8058f43463fb67108df53d61ea80e
-size 422
+//
+//  AccountTabScreen.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import SwiftUI
+
+struct AccountTabScreen: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct AccountTabScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        AccountTabScreen()
+    }
+}

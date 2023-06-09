@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:299134dc38c5269d9d8451fae7bbfc0347191a3f86263c28f876b1f801617067
-size 460
+//
+//  RadioUseCasesProvider.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
+import shared
+
+public class RadioUseCasesProvider {
+    
+    public static let homeScreenUseCaseInstance = GetHomeScreenItemsUseCase()
+    public static let categoriesUseCaseInstance = GetCategoriesUseCase()
+    public static let accountTreeUseCaseInstance = GetAccountTreeInfoUseCase()
+    
+}

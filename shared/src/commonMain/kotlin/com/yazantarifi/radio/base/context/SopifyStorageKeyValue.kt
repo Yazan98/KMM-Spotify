@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a6f28c55572a0eb6fafac8b7a966fdcb4bd8d9c1d5a83613899914618eb3b10e
-size 617
+package com.yazantarifi.radio.base.context
+
+
+class SopifyStorageKeyValue constructor(private val context: SopifyContext) {
+
+    fun put(key: String, value: Int) {
+        context.putInt(key, value)
+    }
+
+    fun put(key: String, value: String) {
+        context.putString(key, value)
+    }
+
+    fun put(key: String, value: Boolean) {
+        context.putBool(key, value)
+    }
+
+    fun getInt(key: String, default: Int): Int = context.getInt(key, default)
+
+
+    fun getString(key: String) : String? = context.getString(key)
+
+
+    fun getBool(key: String, default: Boolean): Boolean = context.getBool(key, default)
+
+}

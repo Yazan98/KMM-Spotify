@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3aa629b0dc081a58f744676cb0f72222df87bea326508a10d173fcd5a3826182
-size 401
+import SwiftUI
+import shared
+
+struct SplashScreen: View {
+    var body: some View {
+        NavigationView {
+            if RadioApplicationUtils.isUserLoggedIn() {
+                HomeScreen.getScreenInstance()
+            } else {
+                AuthScreen()
+            }
+        }
+	}
+}
+
+struct ContentView_Previews: PreviewProvider {
+	static var previews: some View {
+        SplashScreen()
+	}
+}

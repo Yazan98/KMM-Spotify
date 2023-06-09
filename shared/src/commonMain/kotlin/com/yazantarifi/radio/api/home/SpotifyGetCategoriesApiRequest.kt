@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:750f32ff9d6292bfb27d465ba39200d442f036d868155f6cd7f76932ac226592
-size 1472
+package com.yazantarifi.radio.api.home
+
+import com.yazantarifi.radio.base.api.SopifyOneRequest
+import com.yazantarifi.radio.models.SpotifyCategoriesResponse
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
+
+class SpotifyGetCategoriesApiRequest constructor(
+    private val isAllCategories: Boolean
+): SopifyOneRequest<Unit, SpotifyCategoriesResponse>() {
+
+    override fun getRequestUrl(): String {
+        return when (isAllCategories) {
+            true -> "https://api.spotify.com/v1/browse/categories?offset=0&limit=40"
+            false -> "https://api.spotify.com/v1/browse/categories?offset=0&limit=20"
+        }
+    }
+
+    override suspend fun executeRequest(requestBody: Unit, headers: List<Pair<String, String>>) {
+        try {
+            val response = httpClient?.get(getRequestUrl()) {
+                headers.forEach {
+                    header(it.first, it.second)
+                }
+            }
+
+            if (isSuccessResponse(response?.status ?: HttpStatusCode.BadRequest)) {
+                response?.body<SpotifyCategoriesResponse>()?.let {
+                    requestListener?.onSuccess(it)
+                }
+            } else {
+                requestListener?.onError(Throwable(response?.bodyAsText()))
+            }
+        } catch (ex: Exception) {
+            requestListener?.onError(ex)
+        }
+    }
+
+}

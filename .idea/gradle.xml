@@ -17,9 +17,7 @@
             <option value="$PROJECT_DIR$/androidFeatures/core" />
             <option value="$PROJECT_DIR$/androidFeatures/home" />
             <option value="$PROJECT_DIR$/androidFeatures/playlists" />
-            <option value="$PROJECT_DIR$/compose" />
             <option value="$PROJECT_DIR$/shared" />
-            <option value="$PROJECT_DIR$/sopify" />
           </set>
         </option>
       </GradleProjectSettings>

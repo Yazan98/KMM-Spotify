@@ -1,3 +1,49 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7e97901ddfe619110b6f0786d70bd5c28c06a2049ad0bfa0374b4f9faa39df5a
-size 1618
+//
+//  RadioApplicationUtils.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 06/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
+import shared
+import MaterialComponents.MaterialSnackbar
+
+class RadioApplicationUtils {
+    
+    static var httpInstance = HttpBaseClient().httpClient
+    
+    static func isUserLoggedIn() -> Bool {
+        let storageProvider = SopifyStorageProvider(provider: SopifyStorageKeyValue(context: UserDefaults()))
+        return storageProvider.isUserLoggedIn()
+    }
+        
+    static func getAccessToken() -> String {
+        let storageProvider = SopifyStorageProvider(provider: SopifyStorageKeyValue(context: UserDefaults()))
+        return storageProvider.getAccessToken()
+    }
+        
+    static func updateUserLoggedInStatus(newStatus: Bool) {
+        let storageProvider = SopifyStorageProvider(provider: SopifyStorageKeyValue(context: UserDefaults()))
+        storageProvider.updateLoggedInUser(newState: newStatus)
+    }
+        
+    static func updateAccessToken(newStatus: String) {
+        let storageProvider = SopifyStorageProvider(provider: SopifyStorageKeyValue(context: UserDefaults()))
+        storageProvider.insertAccessToken(newToken: newStatus)
+    }
+        
+    static func showMessage(errorMessage: String) {
+        let action = MDCSnackbarMessageAction()
+        let message = MDCSnackbarMessage()
+        message.text = errorMessage
+        let actionHandler = {() in
+                
+        }
+        action.handler = actionHandler
+        action.title = "OK"
+        MDCSnackbarManager.default.show(message)
+    }
+    
+}

@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:740ad141d58df482b0d5704f1b91acc14dba6dd5dd93a369400b066ec9350e12
-size 789
+// Copyright 2019-present the Material Components for iOS authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#import "MDCElevatable.h"
+#import "MDCElevationOverriding.h"
+#import "UIColor+MaterialElevation.h"
+#import "UIView+MaterialElevationResponding.h"

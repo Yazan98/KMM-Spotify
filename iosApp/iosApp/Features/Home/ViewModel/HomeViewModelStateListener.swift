@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e6b9f2c6b2a39c8b5234f316e535a2a225d62fba001ba57190961b7cee33bf0d
-size 389
+//
+//  HomeViewModelStateListener.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
+import shared
+
+public protocol HomeViewModelStateListener {
+    func onHomeScreenItems()
+    
+    func onCategoriesListUpdate(newList: [RadioCategoryItem])
+    func onCategoriesListLoadingUpdate(newState: Bool)
+    
+}

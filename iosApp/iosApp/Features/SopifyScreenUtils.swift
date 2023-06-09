@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2bd5d47db75c7e0152fae018f6674b84793e6d343a77910378201937f8eb5d93
-size 696
+//
+//  SopifyScreenUtils.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
+import shared
+
+public class SopifyScreenUtils<T: NSObject> {
+    
+    static func initViewModelListener(viewModel: SopifyViewModel<T>?) {
+        viewModel?.onAttachListenerInstance(errorListener: ViewModelErrorsListener())
+    }
+}
+
+public class ViewModelErrorsListener: SopifyViewModelListeners {
+    
+    public func onErrorMessageTriggered(message: String) {
+        RadioApplicationUtils.showMessage(errorMessage: message)
+    }
+    
+    public func onErrorScreenEventTriggered(exception: KotlinThrowable) {
+        
+    }
+    
+}

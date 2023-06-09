@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c21425990dd17f2b65f63951264d67580a134d6a777d62826519b48a930f0652
-size 1123
+package com.yazantarifi.radio.base.viewModels
+
+import com.yazantarifi.radio.base.useCases.SopifyEmptyState
+import com.yazantarifi.radio.base.useCases.SopifyState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+abstract class SopifyViewModel<Action>: SopifyBaseViewModel<Action, MutableStateFlow<SopifyState>>() {
+
+    val errorScreenListener: MutableStateFlow<Throwable?> by lazy { MutableStateFlow(null) }
+    val errorMessageListener: MutableStateFlow<String?> by lazy { MutableStateFlow("") }
+    init {
+        initViewModelState()
+    }
+
+    final override fun initViewModelState() {
+        if (state == null) {
+            this.state = MutableStateFlow(getInitialState())
+            scope.launch(coroutineDispatch) {
+                state?.collect {
+                    onAcceptNewState(it)
+                }
+            }
+        }
+    }
+
+    override fun getInitialState(): SopifyState {
+        return SopifyEmptyState
+    }
+
+    private fun onAcceptNewState(newState: SopifyState) {
+        getCurrentState()?.update { newState }
+    }
+
+}

@@ -1,3 +1,75 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:311a98ef31bd046eb0afb0bbbac707587b447a2a3d209fe6ac16031572c65ba4
-size 2612
+package com.yazantarifi.radio.base.api
+
+import io.ktor.client.HttpClient
+import io.ktor.client.statement.HttpResponseContainer
+import io.ktor.client.statement.HttpResponsePipeline
+import io.ktor.http.HttpStatusCode
+import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
+import io.ktor.serialization.suitableCharset
+import io.ktor.util.reflect.TypeInfo
+import io.ktor.util.reflect.platformType
+import io.ktor.utils.io.ByteReadChannel
+import kotlinx.serialization.json.Json
+import kotlin.reflect.KClass
+
+abstract class SopifyRequestManager {
+
+    protected var httpClient: HttpClient? = null
+    companion object {
+        private const val SUCCESS_START_CODE = 200
+        private const val SUCCESS_END_CODE = 300
+    }
+
+    fun addHttpClient(httpClient: HttpClient?) {
+        if (this.httpClient == null) {
+            this.httpClient = httpClient
+            addRequestPiplineInterceptor()
+        }
+    }
+
+    private fun addRequestPiplineInterceptor() {
+        val converter = getSerializable()
+        httpClient?.responsePipeline?.intercept(HttpResponsePipeline.Transform) { (info, body) ->
+            if (body !is ByteReadChannel) return@intercept
+
+            val response = context.response
+            val apiResponse = if (response.status.value in SUCCESS_START_CODE until SUCCESS_END_CODE) {
+                SopifyApplicationState.Success(
+                    converter.deserialize(
+                        context.request.headers.suitableCharset(),
+                        info.ofInnerClassParameter(),
+                        body
+                    )
+                )
+            } else {
+                SopifyApplicationState.Error(responseCode = response.status.value)
+            }
+
+            proceedWith(HttpResponseContainer(info, apiResponse))
+        }
+    }
+
+    open fun clear() {
+        this.httpClient = null
+    }
+
+    private fun TypeInfo.ofInnerClassParameter(): TypeInfo {
+        val typeProjection = kotlinType?.arguments?.get(0)
+        val kType = typeProjection!!.type!!
+        return TypeInfo(kType.classifier as KClass<*>, kType.platformType)
+    }
+
+    protected fun isSuccessResponse(responseCode: HttpStatusCode): Boolean {
+        return responseCode == HttpStatusCode.Accepted || responseCode == HttpStatusCode.OK || responseCode == HttpStatusCode.Created
+    }
+
+    private fun getSerializable(): KotlinxSerializationConverter {
+        return KotlinxSerializationConverter(Json {
+            prettyPrint = true
+            ignoreUnknownKeys = true
+            allowSpecialFloatingPointValues = true
+            isLenient = true
+        })
+    }
+
+}

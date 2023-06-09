@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b0a3a922f86b7967e48993f1f0016e56430cba3362fd9b82c5ec6f44054171eb
-size 305
+package com.yazantarifi.radio.base.context
+
+object SopifyStorageKeys {
+
+    // General Keys
+    const val STORAGE_MAIN_KEY = "sopify.storage.key"
+
+    // Used Keys
+    const val IS_LOGGED_IN = "IS_LOGGED_IN_USER"
+    const val ACCESS_TOKEN = "ACCESS_TOKEN"
+    const val REFRESH_TOKEN = "REFRESH_TOKEN"
+
+}

@@ -1,3 +1,41 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e26e3519709a7280c5612ddf97ad5afba389e6f57e031c4d1addf7fe0119520c
-size 1220
+package com.yazantarifi.radio.base.context
+
+
+class SopifyStorageProvider constructor(private val provider: SopifyStorageKeyValue): CoinaStorageProviderImplementation {
+    override fun updateLoggedInUser(newState: Boolean) {
+        provider.put(SopifyStorageKeys.IS_LOGGED_IN, newState)
+    }
+
+    override fun isUserLoggedIn(): Boolean {
+        return provider.getBool(SopifyStorageKeys.IS_LOGGED_IN, false)
+    }
+
+    override fun insertAccessToken(newToken: String) {
+        provider.put(SopifyStorageKeys.ACCESS_TOKEN, newToken)
+    }
+
+    override fun insertRefreshToken(refreshToken: String) {
+        provider.put(SopifyStorageKeys.REFRESH_TOKEN, refreshToken)
+    }
+
+    override fun getAccessToken(): String {
+        return provider.getString(SopifyStorageKeys.ACCESS_TOKEN) ?: ""
+    }
+
+    override fun getRefreshToken(): String {
+        return provider.getString(SopifyStorageKeys.REFRESH_TOKEN) ?: ""
+    }
+}
+
+interface CoinaStorageProviderImplementation {
+    fun updateLoggedInUser(newState: Boolean)
+    fun isUserLoggedIn(): Boolean
+
+    fun insertAccessToken(newToken: String)
+
+    fun insertRefreshToken(refreshToken: String)
+
+    fun getAccessToken(): String
+
+    fun getRefreshToken(): String
+}

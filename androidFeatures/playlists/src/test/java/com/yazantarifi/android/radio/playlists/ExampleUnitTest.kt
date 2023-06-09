@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:61cc5d767d55b0a76d2f28041c061ef271b8d50eae8108ded1e4741522438339
-size 363
+package com.yazantarifi.android.radio.playlists
+
+import org.junit.Test
+
+import org.junit.Assert.*
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
+    }
+}

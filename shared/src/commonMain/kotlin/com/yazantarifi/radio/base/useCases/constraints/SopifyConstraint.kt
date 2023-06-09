@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:78c74d27562dc63a79184e4b40da71820e922d7f899b7c2a020b3e4fbaeca9ca
-size 437
+package com.yazantarifi.radio.base.useCases.constraints
+
+abstract class SopifyConstraint<RequestValue> constructor(
+    requestValue: RequestValue
+): SopifyType {
+
+    fun execute(onError: (Throwable) -> Unit) {
+        if (!isConstraintValid()) {
+            onError(getInvalidConstraintException())
+        }
+    }
+
+}
+
+interface SopifyType {
+
+    fun isConstraintValid(): Boolean
+
+    fun getInvalidConstraintException(): Throwable
+
+}

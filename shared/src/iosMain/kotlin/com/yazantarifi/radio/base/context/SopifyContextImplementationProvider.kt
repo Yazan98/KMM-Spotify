@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1d74e9c4eafb270f7f311cada68ba875fce2837490183636df59d277b144250d
-size 888
+package com.yazantarifi.radio.base.context
+
+import platform.Foundation.NSUserDefaults
+
+actual fun SopifyContext.putInt(key: String, value: Int) {
+    NSUserDefaults.standardUserDefaults.setInteger(value.toLong(), key)
+}
+
+actual fun SopifyContext.getInt(key: String, default: Int): Int {
+    return NSUserDefaults.standardUserDefaults.integerForKey(key).toInt()
+}
+
+actual fun SopifyContext.putString(key: String, value: String) {
+    NSUserDefaults.standardUserDefaults.setObject(value, key)
+}
+
+actual fun SopifyContext.getString(key: String): String? {
+    return NSUserDefaults.standardUserDefaults.stringForKey(key)
+}
+
+actual fun SopifyContext.putBool(key: String, value: Boolean) {
+    NSUserDefaults.standardUserDefaults.setBool(value, key)
+}
+
+actual fun SopifyContext.getBool(key: String, default: Boolean): Boolean {
+    return NSUserDefaults.standardUserDefaults.boolForKey(key)
+}

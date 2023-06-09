@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:98fc1798b184ef41d1bd57c7fe57bf81aadf4ee30b3c772f691c26bd120fdf84
-size 365
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+#import "MDFTextAccessibility.h"
+
+FOUNDATION_EXPORT double MDFTextAccessibilityVersionNumber;
+FOUNDATION_EXPORT const unsigned char MDFTextAccessibilityVersionString[];
+

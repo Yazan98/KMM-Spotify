@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b01fde38780a6240b199b32fcf576f0fd88a3643f88f0a57ea6908148622413f
-size 514
+package com.yazantarifi.radio.composable.models.items
+
+import com.yazantarifi.radio.composable.models.RadioHomeItem
+
+
+class RadioCategoryItem(
+    val id: String,
+    val name: String,
+    val icon: String,
+    val loadingMessage: String
+): RadioHomeItem {
+    override fun getItemViewType(): Int {
+        return RadioHomeItem.TYPE_CATEGORY
+    }
+
+    override fun isMultiItems(): Boolean {
+        return false
+    }
+
+    override fun getContentList(): List<RadioHomeItem> {
+        return arrayListOf()
+    }
+}

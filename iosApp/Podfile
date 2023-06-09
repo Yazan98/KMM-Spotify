@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:539fbc7702712fc3a623c3c88986d8d0740b344629cb68053a0fcdc2037de17a
-size 494
+target 'iosApp' do
+  use_frameworks!
+  platform :ios, '14.1'
+  pod 'shared', :path => '../shared'
+  pod 'ObjectMapper', '~> 3.5'
+  pod 'MaterialComponents/Snackbar'
+  
+  post_install do |installer|
+      installer.generated_projects.each do |project|
+            project.targets.each do |target|
+                target.build_configurations.each do |config|
+                    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+                 end
+            end
+     end
+  end
+end

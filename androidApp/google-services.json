@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c788134f336f20702dfc15e3e610f7846ce4c739aed1d794a319651aed2a470d
-size 681
+{
+  "project_info": {
+    "project_number": "976051237991",
+    "project_id": "radio-app-e0e5b",
+    "storage_bucket": "radio-app-e0e5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976051237991:android:2d6e656f36a118d32550c2",
+        "android_client_info": {
+          "package_name": "com.yazantarifi.radio.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeZC8z-EiHBMWcPgjpujcZJ4D6G9OAZM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

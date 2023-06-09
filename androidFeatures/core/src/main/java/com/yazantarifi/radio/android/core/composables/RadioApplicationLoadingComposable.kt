@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2da6fddbf4d4ce96998902e65c50e891f189d8c420067c03d3ad0b58ce18fddd
-size 983
+package com.yazantarifi.radio.android.core.composables
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun RadioApplicationLoadingComposable(message: String) {
+    Column(
+    modifier = Modifier
+    .fillMaxWidth()
+    .fillMaxHeight(),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center
+    ) {
+        CircularProgressIndicator(color = MaterialTheme.colorScheme.onBackground)
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(text = message, modifier = Modifier.padding(20.dp), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onBackground)
+    }
+}

@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3bc1cfbb8e74494564e096c6caaa7935a5788339307dd217341f08c4f6319690
-size 906
+package com.yazantarifi.radio.models
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class SpotifyTracksResponse(
+    val items: List<SpotifyTrackContainer>? = null
+)
+
+@Serializable
+data class SpotifyTrackContainer(
+    val track: SpotifyTrack? = null
+)
+
+@Serializable
+data class SpotifyTrack(
+    @SerialName("duration_ms") val duration: Long? = 0L,
+    val id: String? = "",
+    val name: String? = "",
+    @SerialName("preview_url") val previewPlayUrl: String? = "",
+    val artists: List<SpotifyTrackArtist>? = null,
+    val album: SpotifyTrackAlbum? = null
+)
+
+@Serializable
+data class SpotifyTrackArtist(
+    val id: String? = "",
+    val name: String? = ""
+)
+
+@Serializable
+data class SpotifyTrackAlbum(
+    val images: List<SpotifyPlaylistImage>? = null,
+    val name: String? = "",
+    @SerialName("total_tracks") val tracksNumber: Int? = 0
+)

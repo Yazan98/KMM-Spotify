@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:87a114bdac089fcccb2fa408be5d689f8672a817656d844575b7bc10ae7a5b38
-size 286
+package com.yazantarifi.kmm.radio.base.useCases
+
+abstract class SopifyUseCaseAlias<T> {
+
+    private var internalInstance: T? = null
+
+    fun addInstance(instance: T) {
+        this.internalInstance = instance
+    }
+
+    fun getInstance(): T? {
+        return internalInstance
+    }
+
+}

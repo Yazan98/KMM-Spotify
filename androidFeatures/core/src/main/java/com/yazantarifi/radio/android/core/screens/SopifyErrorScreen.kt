@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:005d18ca282ee605bae1422793a356f420948c0e8789cf6f0db09ddea146257b
-size 422
+package com.yazantarifi.radio.android.core.screens
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.Text
+
+class SopifyErrorScreen: ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Text("Error Screen")
+        }
+    }
+}

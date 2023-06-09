@@ -1,3 +1,78 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2c7c57ecaa81b6e120f37c47343ebdfb00e055303d81831c8d474377cc4a328e
-size 2553
+package com.yazantarifi.radio.base
+
+
+import com.yazantarifi.radio.SopifyNoInternetException
+import com.yazantarifi.radio.SopifyUnknownException
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.HttpResponseValidator
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.HttpRequest
+import io.ktor.client.request.headers
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
+import java.net.UnknownHostException
+
+actual class HttpBaseClient {
+
+    actual val httpClient: HttpClient = HttpClient {
+        defaultRequest {
+            contentType(ContentType.Application.Json)
+            headers {
+                append("Content-Type", "application/json")
+                append("Accept", "application/json")
+            }
+        }
+
+        expectSuccess = false
+        developmentMode = true
+        install(ContentNegotiation) {
+            json(Json {
+                prettyPrint = true
+                ignoreUnknownKeys = true
+                allowSpecialFloatingPointValues = true
+                isLenient = true
+            })
+        }
+
+        install(Logging) {
+            logger = Logger.DEFAULT
+            level = LogLevel.ALL
+        }
+
+        HttpResponseValidator {
+            validateResponse { response ->
+                when (response.status.value) {
+//                    CoinaResponseCode.ERROR_RESPONSE_CODE_NOT_FOUND -> {}
+//                    CoinaResponseCode.ERROR_RESPONSE_CODE_REDIRECT -> {}
+//                    CoinaResponseCode.ERROR_RESPONSE_CODE_UNAUTHORIZED -> {}
+                }
+            }
+
+            handleResponseExceptionWithRequest { cause: Throwable, request: HttpRequest ->
+                println("UIUI :: Exception : ${cause.message}")
+                when (cause) {
+                    is ResponseException -> {
+                        throw cause
+                    }
+
+                    is UnknownHostException -> {
+                        throw SopifyNoInternetException()
+                    }
+
+                    else -> {
+                        throw SopifyUnknownException(cause)
+                    }
+                }
+            }
+        }
+
+    }
+}

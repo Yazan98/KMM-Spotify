@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2de7ae28420038a8c3aee5d52efa6c922ff0655d4cae22412d5a6047bacd348d
-size 670
+//
+//  CategoryComposeView.swift
+//  iosApp
+//
+//  Created by Yazan Tarifi on 09/06/2023.
+//  Copyright © 2023 orgName. All rights reserved.
+//
+
+import Foundation
+import shared
+import SwiftUI
+
+struct CategoryComposeView: UIViewControllerRepresentable {
+    var category: RadioCategoryItem
+    init(category: RadioCategoryItem) {
+        self.category = category
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    func makeUIViewController(context: Context) -> some UIViewController {
+        return HomeIosViewControllerKt.HomeCategoryComposableAlias(item: category) { String in
+            
+        }
+    }
+}
