@@ -34,12 +34,6 @@ class GetHomeScreenItemsUseCase constructor(): SopifyUseCase<GetHomeScreenItemsU
         SpotifyGetCategoryPlaylistApiRequest()
     }
 
-    data class RequestValue(
-        val token: String,
-        val isNotificationPermissionShouldShow: Boolean,
-        val isNotificationsEnabled: Boolean
-    )
-
     override fun isConstraintsSupported(): Boolean {
         return false
     }
@@ -252,6 +246,12 @@ class GetHomeScreenItemsUseCase constructor(): SopifyUseCase<GetHomeScreenItemsU
         onSubmitLoadingState(false)
         onSubmitSuccessState(screenItems)
     }
+
+    data class RequestValue(
+        val token: String,
+        val isNotificationPermissionShouldShow: Boolean,
+        val isNotificationsEnabled: Boolean
+    )
 
     override fun clear() {
         super.clear()

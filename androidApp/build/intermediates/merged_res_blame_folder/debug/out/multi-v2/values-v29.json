@@ -4,7 +4,7 @@
             "outputFile": "com.yazantarifi.radio.android.androidApp-mergeDebugResources-73:/values-v29/values-v29.xml",
             "map": [
                 {
-                    "source": "/Users/yazantarifi/KMM-Spotify/androidApp/src/main/res/values-v29/styles.xml",
+                    "source": "/Users/yazantarifi/Code/KMM-Spotify/androidApp/src/main/res/values-v29/styles.xml",
                     "from": {
                         "startLines": "2,8",
                         "startColumns": "4,4",

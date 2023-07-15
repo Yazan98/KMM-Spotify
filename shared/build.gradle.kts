@@ -35,6 +35,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("com.yazantarifi:sopy:1.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation("io.ktor:ktor-client-core:2.2.1")
                 implementation("io.ktor:ktor-client-logging:2.2.1")
@@ -43,9 +44,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
                 implementation("media.kamel:kamel-image:0.5.0")
-
-//                implementation(project(mapOf("path" to ":compose")))
-//                implementation(project(mapOf("path" to ":sopify")))
 
                 implementation(compose.runtime)
                 implementation(compose.foundation)
@@ -57,9 +55,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-//                implementation(project(mapOf("path" to ":compose")))
-//                implementation(project(mapOf("path" to ":sopify")))
-
+                implementation("com.yazantarifi:sopy-android:1.0.1")
                 implementation("com.google.dagger:hilt-android:2.44")
                 implementation("io.ktor:ktor-client-android:2.2.1")
                 implementation("io.ktor:ktor-client-json:2.2.1")
@@ -71,13 +67,19 @@ kotlin {
             }
         }
 
-        val iosX64Main by getting
-        val iosArm64Main by getting
+        val iosX64Main by getting {
+            dependencies {
+                implementation("com.yazantarifi:sopy-iosx64:1.0.1")
+            }
+        }
+        val iosArm64Main by getting {
+            dependencies {
+                implementation("com.yazantarifi:sopy-iosarm64:1.0.1")
+            }
+        }
         val iosSimulatorArm64Main by getting
         val iosMain by creating {
             dependencies {
-//                implementation(project(":compose"))
-//                implementation(project(mapOf("path" to ":sopify")))
                 implementation("io.ktor:ktor-client-ios:2.2.1")
                 implementation("io.ktor:ktor-client-darwin:2.2.1")
             }
@@ -94,7 +96,8 @@ android {
     namespace = "com.yazantarifi.radio"
     compileSdk = 33
     defaultConfig {
-        minSdk = 26
+        minSdk = 21
+        multiDexEnabled = true
     }
 
     compileOptions {

@@ -21,7 +21,7 @@ struct CategoriesTabScreen: View {
             if viewModel.categoriesScreenLoadingState {
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
             } else {
-                ScrollView {
+                     {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(viewModel.categoriesScreenItems, id: \.self) { element in
                             NavigationLink(destination: EmptyView()) {
